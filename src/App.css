@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  min-height: 90.5vh;
 }
 
 .App-logo {
@@ -22,6 +23,20 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+}
+
+.App-content {
+  padding-bottom: 5rem;
+  min-height: 80%;
+  background-color: white;
+}
+
+.App-footer {
+  position: absolute;
+  bottom: 0;
+  text-align: center;
+  width: 100%;
+  height: 5rem;
 }
 
 .App-link {

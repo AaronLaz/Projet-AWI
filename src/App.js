@@ -7,26 +7,35 @@ import Menu from './components/Menu';
 import Dashboard from './components/Dashboard';
 import Footer from './components/Footer';
 import Table from './components/Table';
+import IngredientForm from './components/IngredientForm';
+import { useEffect, useState } from 'react';
 
 
 
 function App() {
+  const [style, setStyle] = useState({});
+  
+  useEffect(() => {
+    setStyle({
+      paddingLeft: '300px',
+      paddingTop: '20px',
+    });
+  },[]);
+
   return (
     <div className="wrapper">
       <Router>
-        <Route exact path={['/', '/mercurial']}>
+        <Route exact path={['/', '/mercurial', '/mercurial/add']}>
           <div>
             <Header/>
           </div>
           <div>
             <Menu/>
           </div>
-          <div>
-            <Route exact path="/" component={Dashboard}/>
+          <div style={style} className="App-content">
+            <Route exact path="/" component={Table}/>
             <Route exact path="/mercurial" component={Table}/>
-          </div>
-          <div>
-            <Footer/>
+            <Route exact path="/mercurial/add" component={IngredientForm}/>
           </div>
         </Route>
       </Router>

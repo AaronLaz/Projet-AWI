@@ -5,13 +5,13 @@ export default class Footer extends Component {
         return (
             <div>
                 {/* /.content-wrapper */}
-                <footer className="main-footer">
+                <div>
                     <strong>Copyright © 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong>
                     All rights reserved.
-                    <div className="float-right d-none d-sm-inline-block">
+                    <div>
                         <b>Version</b> 3.1.0
                     </div>
-                </footer>
+                </div>
             </div>
         )
     }
