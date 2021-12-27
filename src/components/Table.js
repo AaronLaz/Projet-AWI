@@ -9,8 +9,8 @@ export default function Table() {
   const [results, setResults] = useState([]);
 
   const searchIngredients = () => {
-    const regex = new RegExp(search);
-    const result = ingredients.filter(ingredient => ingredient.libelle.match(regex)); // ingredients.filter(ingredient => ingredient.libelle.match(regex));
+    const regex = new RegExp(search.toLowerCase());
+    const result = ingredients.filter(ingredient => ingredient.libelle.toLowerCase().match(regex)); // ingredients.filter(ingredient => ingredient.libelle.match(regex));
     setResults(result);
   }
 
