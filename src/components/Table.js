@@ -10,7 +10,7 @@ export default function Table() {
 
   const searchIngredients = () => {
     const regex = new RegExp(search.toLowerCase());
-    const result = ingredients.filter(ingredient => ingredient.libelle.toLowerCase().match(regex)); // ingredients.filter(ingredient => ingredient.libelle.match(regex));
+    const result = ingredients.filter(ingredient => ingredient.libelle.toLowerCase().match(regex));
     setResults(result);
   }
 
@@ -23,7 +23,7 @@ export default function Table() {
 
   return (
     <div style={{ height: 400, width: '100%' }}>
-      <input type="text" onChange={(ev) => setSearch(ev.target.value)}></input>
+      <input type="text" onChange={(ev) => setSearch(ev.target.value)} placeholder="Recherche par libellé"></input>
       <button onClick={() => searchIngredients()}>Search</button>
       <table>
         <thead>

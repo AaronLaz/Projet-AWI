@@ -1,7 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
 import { BrowserRouter as Router, Redirect, Route, Routes } from 'react-router-dom';
-
 import Header from './components/Header';
 import Menu from './components/Menu';
 import Dashboard from './components/Dashboard';
@@ -9,6 +8,7 @@ import Footer from './components/Footer';
 import Table from './components/Table';
 import IngredientForm from './components/IngredientForm';
 import { useEffect, useState } from 'react';
+import FicheTechnique from './components/FicheTechnique';
 
 
 
@@ -25,7 +25,7 @@ function App() {
   return (
     <div className="wrapper">
       <Router>
-        <Route exact path={['/', '/mercurial', '/mercurial/add']}>
+        <Route exact path={['/', '/mercurial', '/mercurial/add','/fichetechnique/:id']}>
           <div>
             <Header/>
           </div>
@@ -36,6 +36,7 @@ function App() {
             <Route exact path="/" component={Table}/>
             <Route exact path="/mercurial" component={Table}/>
             <Route exact path="/mercurial/add" component={IngredientForm}/>
+            <Route exact path="/fichetechnique/:id" component={FicheTechnique}/>
           </div>
         </Route>
       </Router>
