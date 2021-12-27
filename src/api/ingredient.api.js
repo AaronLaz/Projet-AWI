@@ -10,7 +10,6 @@ export async function getIngredients() {
                 },
             };
             axios.get(url, config).then((ingredients) => {
-                console.log(ingredients.data);
                 resolve(ingredients.data);
             });
         } catch (err) {

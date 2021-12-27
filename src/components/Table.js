@@ -3,37 +3,28 @@ import { DataGrid } from '@mui/x-data-grid';
 import axios from "axios";
 import { getIngredients } from '../api/ingredient.api';
 
-const columns = [
-    { field: 'code', headerName: 'CODE', width: 70 },
-    { field: 'libelle', headerName: 'LIBELLE', width: 150 },
-    { field: 'unit', headerName: 'UNITE', width: 70 },
-    { field: 'unitprice', headerName: 'PRIX UNITAIRE', width: 140 },
-    { field: 'stocks', headerName: 'STOCKS', width: 100 },
-    { field: 'stockvalue', headerName: 'STOCKS VAL', width: 120 },
-    { field: 'allergene', headerName: 'ALLERGENE', width: 130 },
-  ];
-
 export default function Table() {
   const [ingredients, setIngredients] = useState([]);
+  const [search, setSearch] = useState('');
+  const [results, setResults] = useState([]);
+
+  const searchIngredients = () => {
+    const regex = new RegExp(search);
+    const result = ingredients.filter(ingredient => ingredient.libelle.match(regex)); // ingredients.filter(ingredient => ingredient.libelle.match(regex));
+    setResults(result);
+  }
 
   useEffect(() => {
     getIngredients().then((result) => {
       setIngredients(result);
+      setResults(result);
     });
   }, []);
 
-  console.log(ingredients)
-
   return (
     <div style={{ height: 400, width: '100%' }}>
-      {/* <DataGrid
-        rows={ingredients}
-        columns={columns}
-        pageSize={5}
-        rowsPerPageOptions={[5]}
-        checkboxSelection
-      />
-    </div */}
+      <input type="text" onChange={(ev) => setSearch(ev.target.value)}></input>
+      <button onClick={() => searchIngredients()}>Search</button>
       <table>
         <thead>
           <tr>
@@ -47,7 +38,7 @@ export default function Table() {
           </tr>
         </thead>
         <tbody>
-          {ingredients.map((i) => (
+          {results.map((i) => (
             <tr key={i.code}>
               <th>{i.code}</th>
               <th>{i.libelle}</th>
