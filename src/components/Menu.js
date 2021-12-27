@@ -30,35 +30,27 @@ export default class Menu extends Component {
                                 {/* Add icons to the links using the .nav-icon class
          with font-awesome or any other icon font library */}
                                 <li className="nav-item">
-                                    <a href="#" className="nav-link">
+                                    <a href="/mercurial" className="nav-link">
                                         <i className="nav-icon fas fa-th" />
                                         <p>
-                                            Page 1
+                                            Mercuriales
                                         </p>
                                     </a>
                                 </li>
                                 <li className="nav-item">
-                                    <a href="#" className="nav-link">
+                                    <a href="/" className="nav-link">
                                         <i className="nav-icon fas fa-copy" />
                                         <p>
-                                            Page 2
+                                            Fiches Techniques
                                         </p>
                                     </a>
                                 </li>
+                                <li className="nav-header">Finances</li>
                                 <li className="nav-item">
-                                    <a href="#" className="nav-link">
+                                    <a href="/" className="nav-link">
                                         <i className="nav-icon fas fa-chart-pie" />
                                         <p>
-                                            Page 3
-                                        </p>
-                                    </a>
-                                </li>
-                                <li className="nav-header">Title</li>
-                                <li className="nav-item">
-                                    <a href="#" className="nav-link">
-                                        <i className="nav-icon far fa-calendar-alt" />
-                                        <p>
-                                            Page 4
+                                            Couts
                                         </p>
                                     </a>
                                 </li>
