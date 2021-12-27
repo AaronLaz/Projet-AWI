@@ -2,21 +2,21 @@ import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { getIngredients } from '../api/ingredient.api';
 
-export default function Table() {
+export default function ListeAllergenes() {
   const [ingredients, setIngredients] = useState([]);
   const [search, setSearch] = useState('');
   const [results, setResults] = useState([]);
 
   const searchIngredients = () => {
     const regex = new RegExp(search.toLowerCase());
-    const result = ingredients.filter(ingredient => ingredient.libelle.toLowerCase().match(regex));
+    const result = ingredients.filter(ingredient => ingredient.libelle.toLowerCase().match(regex) && ingredient.allergene === 1);
     setResults(result);
   }
 
   useEffect(() => {
     getIngredients().then((result) => {
-      setIngredients(result);
-      setResults(result);
+      setIngredients(result.filter(ingredient => ingredient.allergene === 1));
+      setResults(result.filter(ingredient => ingredient.allergene === 1));
     });
   }, []);
 

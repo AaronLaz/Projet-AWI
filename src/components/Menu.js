@@ -33,12 +33,20 @@ export default class Menu extends Component {
                                     <a href="/mercurial" className="nav-link">
                                         <i className="nav-icon fas fa-th" />
                                         <p>
-                                            Mercuriales
+                                            Mercuriale
                                         </p>
                                     </a>
                                 </li>
                                 <li className="nav-item">
-                                    <a href="/" className="nav-link">
+                                    <a href="/listeallergenes" className="nav-link">
+                                        <i className="nav-icon fas fa-copy" />
+                                        <p>
+                                            Liste Allergènes
+                                        </p>
+                                    </a>
+                                </li>
+                                <li className="nav-item">
+                                    <a href="/fichetechniques" className="nav-link">
                                         <i className="nav-icon fas fa-copy" />
                                         <p>
                                             Fiches Techniques

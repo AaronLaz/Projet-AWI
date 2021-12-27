@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React, { useState } from 'react';
 import { postIngredient } from '../api/ingredient.api';
 
 export default function IngredientForm() {

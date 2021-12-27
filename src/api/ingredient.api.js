@@ -1,4 +1,4 @@
-import axios, { AxiosRequestConfig } from 'axios';
+import axios from 'axios';
 export async function getIngredients() {
     return new Promise((resolve, reject) => {
         try {
