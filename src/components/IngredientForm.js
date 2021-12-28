@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import { postIngredient } from '../api/ingredient.api';
 import './IngredientForm.css';
 
@@ -11,9 +12,16 @@ export const IngredientForm = () => {
     const [price, setPrice] = useState();
     const [stock, setStock] = useState();
     const [allergen, setAllergen] = useState(false);
+    const history = useHistory();
 
     const submit = () => {
         postIngredient(code, libelle, unit, price, stock, stock*price, allergen);
+        navDetail();
+    }
+
+    const navDetail = () => {
+        const url = `/ingredient/${code}`;
+        history.push(url);
     }
 
     return (
