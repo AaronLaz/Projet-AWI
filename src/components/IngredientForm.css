@@ -1,0 +1,62 @@
+.FormContainer {
+    width: 100%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.Form {
+    margin:auto;
+    background-color: #e6f5ff;
+    position: relative;
+    width: 500px;
+    justify-content: center;
+    padding: 20px;
+    box-shadow: 8px 5px 5px #80ccff;
+}
+
+.blockForm {
+    padding-top: 20px;
+}
+
+.gridrow {
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: minmax(40px, auto);
+}
+
+.FormLabel {
+    padding-top: 8px;
+    text-align: justify;
+}
+
+.FormInput[type='text'], .FormInput[type='number']{
+    padding-left: 5px;
+}
+
+.FormInput[type='text']:disabled, .FormInput[type='number']:disabled{
+    color: black;
+}
+
+.FormInput[type='checkbox']:disabled {
+    background-color: black;
+}
+
+.FormInput[type='checkbox']{
+    margin-top: 17px;
+}
+
+.FormSubmit {
+    margin: auto;
+    margin-top: 20px;
+    position: relative;
+    background-color: #b3e0ff;
+    border: none;
+    color:black;
+    padding: auto;
+    box-shadow: 3px 3px 3px #80ccff;
+}
+

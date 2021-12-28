@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { Helmet } from 'react-helmet';
 import { postIngredient } from '../api/ingredient.api';
+import './IngredientForm.css';
 
-export default function IngredientForm() {
+export const IngredientForm = () => {
 
     const [code, setCode] = useState();
     const [libelle, setLibelle] = useState();
@@ -15,46 +17,49 @@ export default function IngredientForm() {
     }
 
     return (
-        <div class="row">
-            <div class="col s12">
-                <div class="row">
-                    <div class="input-field col s12">
-                        <input placeholder="Code" id="code" type="number" class="validate" onChange={(event) => setCode(event.target.value)}/>
-                        <label for="code">Code</label>
+        <>
+        <Helmet>Ajouter Ingredient</Helmet>
+        <div className='FormContainer'>
+            <div className='Form'>
+                <h3>Ajouter Ingredient</h3>
+                <div className='blockForm'>
+                    <div className='gridrow'>
+                        <label className='FormLabel' for="code">Code</label>
+                        <input className='FormInput' placeholder="Code" id="code" type="number" onChange={(event) => setCode(event.target.value)} />
                     </div>
                 </div>
-                <div class="row">
-                    <div class="input-field col s12">
-                        <input placeholder="Libellé" id="libelle" type="text" class="validate" onChange={(event) => setLibelle(event.target.value)}/>
-                        <label for="libelle">Libelle</label>
+                <div className='blockForm'>
+                    <div className='gridrow'>
+                        <label className='FormLabel' for="libelle">Libelle</label>
+                        <input className='FormInput' placeholder="Libellé" id="libelle" type="text" onChange={(event) => setLibelle(event.target.value)} />
                     </div>
                 </div>
-                <div class="input-field col s12">
-                    <div class="input-field col s12">
-                        <input placeholder="Unité" id="unit" type="text" class="validate" onChange={(event) => setUnit(event.target.value)}/>
-                        <label for="unite">Unité</label>
+                <div className='blockForm'>
+                    <div className='gridrow'>
+                        <label className='FormLabel' for="unite">Unité</label>
+                        <input className='FormInput' placeholder="Unité" id="unit" type="text" onChange={(event) => setUnit(event.target.value)} />
                     </div>
                 </div>
-                <div class="row">
-                    <div class="row">
-                        <input type="number" step="0.01" name="prix_unitaire" placeholder="0.00" class="validate" onChange={(event) => setPrice(event.target.value)}/>
-                        <label for="prix_unitaire">Prix Unitaire (€)</label>
+                <div className='blockForm'>
+                    <div className='gridrow'>
+                        <label className='FormLabel' for="prix_unitaire">Prix Unitaire (€)</label>
+                        <input className='FormInput' type="number" step="0.01" name="prix_unitaire" placeholder="0.00" onChange={(event) => setPrice(event.target.value)} />
                     </div>
                 </div>
-                <div class="row">
-                    <div class="input-field col s12">
-                        <input type="number" step="1" name="stocks" placeholder="0" class="validate" onChange={(event) => setStock(event.target.value)}/>
-                        <label for="stocks">Stocks</label>
+                <div className='blockForm'>
+                    <div className='gridrow'>
+                        <label className='FormLabel' for="stocks">Stocks</label>
+                        <input className='FormInput' type="number" step="1" name="stocks" placeholder="0" onChange={(event) => setStock(event.target.value)} />
                     </div>
                 </div>
-                <div>
-                    <label>Allergène</label>
-                    <input name="allergen" type="checkbox" onChange={(event) => setAllergen(event.target.checked)}/>
+                <div className='blockForm'>
+                    <div className='gridrow'>
+                        <label className='FormLabel'>Allergène</label>
+                        <input className='FormInput' name="allergen" type="checkbox" onChange={(event) => setAllergen(event.target.checked)} />
+                    </div>
                 </div>
-                <div>
-                    <button onClick={() => submit()}>Ajouter l'Ingredient</button>
-                </div>
+                <button className='FormSubmit' onClick={() => submit()}>Ajouter</button>
             </div>
-        </div>
+        </div></>
     )
 }
