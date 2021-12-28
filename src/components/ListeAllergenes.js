@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
+import { Link } from 'react-router-dom';
 import { getIngredients } from '../api/ingredient.api';
 
 export default function ListeAllergenes() {
@@ -35,6 +36,7 @@ export default function ListeAllergenes() {
             <th>STOCKS</th>
             <th>VALEUR DU STOCK</th>
             <th>ALLERGENE</th>
+            <th>Voir détail</th>
           </tr>
         </thead>
         <tbody>
@@ -47,6 +49,7 @@ export default function ListeAllergenes() {
               <th>{i.stocks}</th>
               <th>{i.stockvalue}</th>
               <th>{i.allergene}</th>
+              <th><Link to={`/ingredient/${i.code}`}>Voir</Link></th>
             </tr>
           ))}
         </tbody>
