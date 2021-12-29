@@ -60,3 +60,17 @@
     box-shadow: 3px 3px 3px #80ccff;
 }
 
+.DelButton {
+    margin: auto;
+    margin-top: 20px;
+    position: relative;
+    border: none;
+    color:black;
+    padding: auto;
+    box-shadow: 3px 3px 3px #ff3333;
+    background-color: #ff6666;
+}
+
+.DelButton:hover{
+    background-color:#ff1a1a;
+}

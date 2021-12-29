@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 import { getIngredients } from '../api/ingredient.api';
+import './Table.css';
 
 export default function Table() {
   const [ingredients, setIngredients] = useState([]);
@@ -24,32 +25,37 @@ export default function Table() {
   return (
     <><Helmet>Mercurial</Helmet>
     <div style={{ height: 400, width: '100%' }}>
-      <input type="text" onChange={(ev) => setSearch(ev.target.value)} placeholder="Recherche par libellé"></input>
-      <button onClick={() => searchIngredients()}>Search</button>
-      <table>
-        <thead>
+      <div className="mercurial-header-div">
+        <div>
+          <input className="mercurial-search-input" type="text" onChange={(ev) => setSearch(ev.target.value)} placeholder="Recherche par libellé"></input>
+          <button className="mercurial-search-button" onClick={() => searchIngredients()}>Rechercher</button>
+        </div>
+        <a className='mercurial-add-link' href='/mercurial/add'><button className="mercurial-add-button">Ajouter</button></a>
+      </div>
+      <table className="mercurial-table">
+        <thead className="mercurial-thead">
           <tr>
-            <th>CODE</th>
-            <th>LIBELLE</th>
-            <th>UNITE</th>
-            <th>PRIX UNITAIRE</th>
-            <th>STOCKS</th>
-            <th>VALEUR DU STOCK</th>
-            <th>ALLERGENE</th>
-            <th>Voir les détails</th>
+            <th className="mercurial-thead-th">CODE</th>
+            <th className="mercurial-thead-th">LIBELLE</th>
+            <th className="mercurial-thead-th">UNITE</th>
+            <th className="mercurial-thead-th">PRIX UNITAIRE</th>
+            <th className="mercurial-thead-th">STOCKS</th>
+            <th className="mercurial-thead-th">VALEUR DU STOCK</th>
+            <th className="mercurial-thead-th">ALLERGENE</th>
+            <th className="mercurial-thead-th">Voir les détails</th>
           </tr>
         </thead>
         <tbody>
           {results.map((i) => (
             <tr key={i.code}>
-              <th>{i.code}</th>
-              <th>{i.libelle}</th>
-              <th>{i.unit}</th>
-              <th>{i.unitprice}</th>
-              <th>{i.stocks}</th>
-              <th>{i.stockvalue}</th>
-              <th>{i.allergene}</th>
-              <th><Link to={`/ingredient/${i.code}`}>Voir</Link></th>
+              <th className="mercurial-thead-th">{i.code}</th>
+              <th className="mercurial-tbody-th">{i.libelle}</th>
+              <th className="mercurial-thead-th">{i.unit}</th>
+              <th className="mercurial-thead-th">{i.unitprice}€</th>
+              <th className="mercurial-thead-th">{i.stocks}</th>
+              <th className="mercurial-thead-th">{i.stockvalue}€</th>
+              <th className="mercurial-thead-th">{i.allergene}</th>
+              <th className="mercurial-thead-th"><Link to={`/ingredient/${i.code}`}>Voir</Link></th>
             </tr>
           ))}
         </tbody>

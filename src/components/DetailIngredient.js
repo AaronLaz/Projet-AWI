@@ -1,18 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
-import { useParams } from 'react-router-dom';
-import { getIngredient } from '../api/ingredient.api';
+import { useParams, useHistory } from 'react-router-dom';
+import { getIngredient, supprIngredient } from '../api/ingredient.api';
 import './IngredientForm.css';
 
 export default function DetailIngredient() {
     const [ingredient, setIngredient] = useState([]);
     const { id } = useParams();
+    const history = useHistory();
 
     useEffect(() => {
         getIngredient(id).then((result) => {
             setIngredient(result);
         });
-      }, []);
+    }, []);
+    
+    
+    const navDetail = () => {
+        const url = `/mercurial`;
+        history.push(url);
+    }
+
+    const deleteIngredient = () => {
+        supprIngredient(id).then(() => navDetail());
+    }
+
     return (
         <>
         <Helmet>Detail Ingredient</Helmet>
@@ -55,6 +67,7 @@ export default function DetailIngredient() {
                         <input disabled className='FormInput' name="allergen" type="checkbox" checked={ingredient.allergene}/>
                     </div>
                 </div>
+                <button className="DelButton" onClick={() => deleteIngredient()}>Supprimer</button>
             </div>
         </div></>
     )

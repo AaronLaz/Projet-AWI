@@ -1,0 +1,68 @@
+.mercurial-header-div{
+    position:relative;
+    display:flex;
+    flex-direction:row;
+    margin:auto;
+    margin-bottom: 20px;
+    width:65%;
+}
+
+.mercurial-add-link{
+    position:relative;
+    margin-left: auto;
+}
+
+.mercurial-table{
+    border:3px solid;
+    margin:auto;
+}
+
+.mercurial-thead{
+    background-color: #b3e0ff;
+}
+
+.mercurial-thead-th{
+    border:1px solid;
+    text-align: center;
+    padding:5px 10px 5px 10px;
+}
+
+.mercurial-tbody-th{
+    border:1px solid;
+    padding:5px 10px 5px 10px;
+}
+
+.mercurial-add-button{
+    margin: 5px 5px 5px 5px;
+    margin-top: 20px;
+    margin-left: auto;
+    position: relative;
+    background-color: #b3e0ff;
+    border: none;
+    color:black;
+    padding: 5px 20px 5px 20px;
+    box-shadow: 3px 3px 3px #80ccff;
+}
+
+.mercurial-add-button:hover{
+    background-color: #87ccfa;
+}
+
+.mercurial-search-button{
+    margin: 5px 5px 5px 5px;
+    margin-top: 20px;
+    position: relative;
+    background-color: #b3e0ff;
+    border: none;
+    color:black;
+    padding: 5px 20px 5px 20px;
+    box-shadow: 3px 3px 3px #80ccff;
+}
+
+.mercurial-search-button:hover{
+    background-color: #87ccfa;
+}
+
+.mercurial-search-input{
+
+}

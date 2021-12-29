@@ -65,3 +65,22 @@ export async function postIngredient(code, libelle, unit, price, stock, stockpri
         }
     })
 }
+
+export async function supprIngredient(id){
+    return new Promise((resolve, reject) => {
+        try{
+            const url = `https://awi-backend.herokuapp.com/ingredient/delete/${id}`;
+            const config = {
+                method: 'delete',
+                headers: {
+                    'Content-Type': 'application/json' 
+                },
+            };
+            axios(url, config).then((result) => {
+                resolve(result.data);
+            });
+        } catch (err) {
+            reject(err);
+        }
+    })
+}

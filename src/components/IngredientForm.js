@@ -15,8 +15,7 @@ export const IngredientForm = () => {
     const history = useHistory();
 
     const submit = () => {
-        postIngredient(code, libelle, unit, price, stock, stock*price, allergen);
-        navDetail();
+        postIngredient(code, libelle, unit, price, stock, stock*price, allergen).then((result) => {navDetail();});
     }
 
     const navDetail = () => {
