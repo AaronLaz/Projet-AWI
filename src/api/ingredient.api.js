@@ -84,3 +84,31 @@ export async function supprIngredient(id){
         }
     })
 }
+
+// requires input names code, libelle, unit, unitprice, stocks, stockvalue and allergene
+export async function updateIngredient(code, libelle, unit, price, stock, stockprice, allergen){
+    return new Promise((resolve, reject) => {
+        try {
+            const url = `https://awi-backend.herokuapp.com/ingredient/put/${code}`;
+            const config = {
+                method: 'put',
+                headers: {
+                    'Content-Type': 'application/json' 
+                },
+                data: {
+                    "libelle": libelle,
+                    "unit": unit,
+                    "unitprice": price,
+                    "stocks": stock,
+                    "stockvalue": stockprice,
+                    "allergene": allergen,
+                }
+            };
+            axios(url, config).then((result) => {
+                resolve(result.data);
+            });
+        } catch (err) {
+            reject(err);
+        }
+    })
+}

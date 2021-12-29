@@ -1,33 +1,36 @@
 import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { useParams, useHistory } from 'react-router-dom';
-import { getIngredient, supprIngredient } from '../api/ingredient.api';
+import { getIngredient, updateIngredient } from '../api/ingredient.api';
 import './IngredientForm.css';
 
-export default function DetailIngredient() {
-    const [ingredient, setIngredient] = useState([]);
+export default function ModifyIngredient() {
     const { id } = useParams();
     const history = useHistory();
+    const [libelle, setLibelle] = useState();
+    const [unit, setUnit] = useState();
+    const [price, setPrice] = useState();
+    const [stock, setStock] = useState();
+    const [allergen, setAllergen] = useState();
 
     useEffect(() => {
         getIngredient(id).then((result) => {
-            setIngredient(result);
+            setLibelle(result.libelle);
+            setUnit(result.unit);
+            setPrice(result.unitprice);
+            setStock(result.stocks);
+            setAllergen(result.allergene);
         });// eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     
     
     const navDetail = () => {
-        const url = `/mercurial`;
+        const url = `/ingredient/${id}`;
         history.push(url);
     }
 
-    const deleteIngredient = () => {
-        supprIngredient(id).then(() => navDetail());
-    }
-
-    const modifyIngredient = () => {
-        const url = `/ingredient/update/${id}`;
-        history.push(url);
+    const update = () => {
+        updateIngredient(id, libelle, unit, price, stock, stock*price, allergen).then(() => navDetail());
     }
 
     return (
@@ -39,41 +42,41 @@ export default function DetailIngredient() {
                 <div className='blockForm'>
                     <div className='gridrow'>
                         <label className='FormLabel' for="code">Code</label>
-                        <input disabled className='FormInput' placeholder="Code" id="code" type="number" value={id}/>
+                        <input disabled className='FormInput' id="code" type="number" value={id}/>
                     </div>
                 </div>
                 <div className='blockForm'>
                     <div className='gridrow'>
                         <label className='FormLabel' for="libelle">Libelle</label>
-                        <input disabled className='FormInput' placeholder="Libellé" id="libelle" type="text" value={ingredient.libelle}/>
+                        <input className='FormInput' id="libelle" type="text" value={libelle} onChange={(event) => setLibelle(event.target.value)}/>
                     </div>
                 </div>
                 <div className='blockForm'>
                     <div className='gridrow'>
                         <label className='FormLabel' for="unite">Unité</label>
-                        <input disabled className='FormInput' placeholder="Unité" id="unit" type="text" value={ingredient.unit}/>
+                        <input className='FormInput' id="unit" type="text" value={unit} onChange={(event) => setUnit(event.target.value)}/>
                     </div>
                 </div>
                 <div className='blockForm'>
                     <div className='gridrow'>
                         <label className='FormLabel' for="prix_unitaire">Prix Unitaire (€)</label>
-                        <input disabled className='FormInput' type="number" step="0.01" name="prix_unitaire" placeholder="0.00" value={ingredient.unitprice}/>
+                        <input className='FormInput' type="number" step="0.01" name="prix_unitaire" value={price} onChange={(event) => setPrice(event.target.value)}/>
                     </div>
                 </div>
                 <div className='blockForm'>
                     <div className='gridrow'>
                         <label className='FormLabel' for="stocks">Stocks</label>
-                        <input disabled className='FormInput' type="number" step="1" name="stocks" placeholder="0" value={ingredient.stocks}/>
+                        <input className='FormInput' type="number" step="1" name="stocks" value={stock} onChange={(event) => setStock(event.target.value)}/>
                     </div>
                 </div>
                 <div className='blockForm'>
                     <div className='gridrow'>
                         <label className='FormLabel'>Allergène</label>
-                        <input disabled className='FormInput' name="allergen" type="checkbox" checked={ingredient.allergene}/>
+                        <input className='FormInput' name="allergen" type="checkbox" checked={allergen} onChange={(event) => setAllergen(event.target.checked)}/>
                     </div>
                 </div>
-                <button className="DelButton" onClick={() => deleteIngredient()}>Supprimer</button>
-                <button className="ModifyButton" onClick={() => modifyIngredient()}>Modifier</button>
+                <button className="DelButton" onClick={() => navDetail()}>Annuler</button>
+                <button className="ModifyButton" onClick={() => update()}>Confirmer</button>
             </div>
         </div></>
     )

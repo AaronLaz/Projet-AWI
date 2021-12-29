@@ -74,3 +74,19 @@
 .DelButton:hover{
     background-color:#ff1a1a;
 }
+
+.ModifyButton {
+    margin: auto;
+    margin-top: 20px;
+    margin-left: 20px;
+    position: relative;
+    border: none;
+    color:black;
+    padding: auto;
+    box-shadow: 3px 3px 3px #bf80ff;
+    background-color: #d9b3ff;
+}
+
+.ModifyButton:hover {
+    background-color: #bf80ff;
+}

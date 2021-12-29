@@ -8,6 +8,7 @@ import FicheTechnique from './components/FicheTechnique';
 import ListeFicheTechniques from './components/ListeFicheTechniques';
 import ListeAllergenes from './components/ListeAllergenes';
 import DetailIngredient from './components/DetailIngredient';
+import ModifyIngredient from './components/ModifyIngredient';
 
 
 
@@ -24,7 +25,7 @@ function App() {
   return (
     <div>
       <Router>
-        <Route exact path={['/', '/mercurial', '/mercurial/add','/fichetechnique/:id','/fichetechniques','/listeallergenes','/ingredient/:id']}>
+        <Route exact path={['/', '/mercurial', '/mercurial/add','/fichetechnique/:id','/fichetechniques','/listeallergenes','/ingredient/:id','/ingredient/update/:id']}>
           <div>
             <Menu/>
           </div>
@@ -33,6 +34,7 @@ function App() {
             <Route exact path="/mercurial" component={Table}/>
             <Route exact path="/mercurial/add" component={IngredientForm}/>
             <Route exact path="/ingredient/:id" component={DetailIngredient}/>
+            <Route exact path="/ingredient/update/:id" component={ModifyIngredient}/>
             <Route exact path="/listeallergenes" component={ListeAllergenes}/>
             <Route exact path="/fichetechnique/:id" component={FicheTechnique}/>
             <Route exact path="/fichetechniques" component={ListeFicheTechniques}/>

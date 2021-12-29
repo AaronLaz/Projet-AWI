@@ -16,7 +16,7 @@ export default function Table() {
   }
 
   const toBoolean = (bool) => {
-    if(bool == 1){
+    if(bool === 1){
       return "Oui";
     }else{
       return "Non";
