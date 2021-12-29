@@ -15,6 +15,14 @@ export default function Table() {
     setResults(result);
   }
 
+  const toBoolean = (bool) => {
+    if(bool == 1){
+      return "Oui";
+    }else{
+      return "Non";
+    }
+  }
+
   useEffect(() => {
     getIngredients().then((result) => {
       setIngredients(result);
@@ -54,7 +62,7 @@ export default function Table() {
               <th className="mercurial-thead-th">{i.unitprice}€</th>
               <th className="mercurial-thead-th">{i.stocks}</th>
               <th className="mercurial-thead-th">{i.stockvalue}€</th>
-              <th className="mercurial-thead-th">{i.allergene}</th>
+              <th className="mercurial-thead-th">{toBoolean(i.allergene)}</th>
               <th className="mercurial-thead-th"><Link to={`/ingredient/${i.code}`}>Voir</Link></th>
             </tr>
           ))}
