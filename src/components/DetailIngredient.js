@@ -30,6 +30,11 @@ export default function DetailIngredient() {
         history.push(url);
     }
 
+    const addStock = () => {
+        const url = `/ingredient/addstock/${id}`;
+        history.push(url);
+    }
+
     return (
         <>
         <Helmet>Detail Ingredient</Helmet>
@@ -74,6 +79,7 @@ export default function DetailIngredient() {
                 </div>
                 <button className="DelButton" onClick={() => deleteIngredient()}>Supprimer</button>
                 <button className="ModifyButton" onClick={() => modifyIngredient()}>Modifier</button>
+                <button className="AddButton" onClick={() => addStock()}>Ajouter du stock</button>
             </div>
         </div></>
     )

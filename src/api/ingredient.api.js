@@ -112,3 +112,27 @@ export async function updateIngredient(code, libelle, unit, price, stock, stockp
         }
     })
 }
+
+
+export async function addStock(code, stock, stockprice){
+    return new Promise((resolve, reject) => {
+        try {
+            const url = `https://awi-backend.herokuapp.com/ingredient/addstock/${code}`;
+            const config = {
+                method: 'put',
+                headers: {
+                    'Content-Type': 'application/json' 
+                },
+                data: {
+                    "stocks": stock,
+                    "unitprice":stockprice,
+                }
+            };
+            axios(url, config).then((result) => {
+                resolve(result.data);
+            });
+        } catch (err) {
+            reject(err);
+        }
+    })
+}

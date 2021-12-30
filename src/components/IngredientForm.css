@@ -90,3 +90,20 @@
 .ModifyButton:hover {
     background-color: #bf80ff;
 }
+
+
+.AddButton {
+    margin: auto;
+    margin-top: 20px;
+    margin-left: 20px;
+    position: relative;
+    border: none;
+    color:black;
+    padding: auto;
+    box-shadow: 3px 3px 3px #33ffad;
+    background-color: #66ffc2;
+}
+
+.AddButton:hover {
+    background-color: #33ffad;
+}
