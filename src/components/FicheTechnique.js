@@ -51,7 +51,7 @@ export default function FicheTechnique() {
                          <p className='info'>{i.unit}</p>
                          <p className='info'>{i.quantity}</p>
                         </>
-                        )) 
+                        ));
                     })}
                     
                 </div>

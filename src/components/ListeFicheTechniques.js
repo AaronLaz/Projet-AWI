@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 import { getFicheTechniques } from '../api/fichetechnique.api';
+import './Table.css'
 
 
 export default function ListeFicheTechniques() {
@@ -26,31 +27,31 @@ export default function ListeFicheTechniques() {
     return(
         <>
         <Helmet><title>Liste des Fiches Techniques</title></Helmet>
-        <div style={{ height: 400, width: '100%' }}>
+        <div>
             <input type="text" onChange={(ev) => setSearch(ev.target.value)} placeholder="Recherche par libellé"></input>
             <button onClick={() => searchFichesTechniques()}>Search</button>
-            <table>
-                <thead>
+            <table className="mercurial-table">
+                <thead className="mercurial-thead">
                 <tr>
-                    <th>ID</th>
-                    <th>INTITULE</th>
-                    <th>DESCRIPTION</th>
-                    <th>AUTEUR</th>
-                    <th>RESPONSABLE</th>
-                    <th>NBRE DE COUVERTS</th>
-                    <th>Voir la fiche technique</th>
+                    <th className="mercurial-thead-th">ID</th>
+                    <th className="mercurial-thead-th">INTITULE</th>
+                    <th className="mercurial-thead-th">DESCRIPTION</th>
+                    <th className="mercurial-thead-th">AUTEUR</th>
+                    <th className="mercurial-thead-th">RESPONSABLE</th>
+                    <th className="mercurial-thead-th">NBRE DE COUVERTS</th>
+                    <th className="mercurial-thead-th">Voir la fiche technique</th>
                 </tr>
                 </thead>
                 <tbody>
                 {results.map((f) => (
                     <tr key={f.id}>
-                        <th>{f.id}</th> 
-                        <th>{f.name}</th>    
-                        <th>{f.header}</th>
-                        <th>{f.author}</th>
-                        <th>{f.responsable}</th>
-                        <th>{f.nbserved}</th>
-                        <th><Link to={`/fichetechnique/${f.id}`}>Voir</Link></th>
+                        <th className="mercurial-thead-th">{f.id}</th> 
+                        <th className="mercurial-tbody-th">{f.name}</th>    
+                        <th className="mercurial-tbody-th">{f.header}</th>
+                        <th className="mercurial-thead-th">{f.author}</th>
+                        <th className="mercurial-thead-th">{f.responsable}</th>
+                        <th className="mercurial-thead-th">{f.nbserved}</th>
+                        <th className="mercurial-thead-th"><Link to={`/fichetechnique/${f.id}`}>Voir</Link></th>
                     </tr>
                 ))}
                 </tbody>
