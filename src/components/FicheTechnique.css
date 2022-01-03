@@ -1,6 +1,7 @@
 
 .container {
     background-color: gainsboro;
+    border: 3px solid;
 }
 
 .grid1 {
@@ -8,6 +9,7 @@
     width: 100%;
     grid-template-columns: repeat(3, 1fr);
     grid-auto-rows: minmax(100px, auto);
+    border: 1px solid;
 }
 
 .grid2 {
@@ -15,8 +17,14 @@
     width: 100%;
     grid-template-columns: repeat(2, 1fr);
     grid-auto-rows: minmax(100px, auto);
+    border: 1px solid;
+}
+
+.title, .centered {
+    text-align: center;
 }
 
 .grid1 > .title, .info {
     background-color: aliceblue;
+    border: 1px solid;
 }

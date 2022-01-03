@@ -59,9 +59,9 @@ export default function FicheTechnique() {
                     {ingredient.forEach((s2) => {
                         s2.forEach(i => (
                         <>
-                         <p className='info'>{i.libelle}</p>
-                         <p className='info'>{i.unit}</p>
-                         <p className='info'>{i.quantity}</p>
+                         <p className='info centered'>{i.libelle}</p>
+                         <p className='info centered'>{i.unit}</p>
+                         <p className='info centered'>{i.quantity}</p>
                         </>
                         ));
                     })}
@@ -73,9 +73,9 @@ export default function FicheTechnique() {
                     <h4 className='title'>DUREE</h4>
                     {step.map((s) => (
                         <>
-                         <p className='info'>{s.stepid}</p>
-                         <div className='info'><p>{s.title}</p><p>{s.description}</p></div>
-                         <p className='info'>{s.time}</p>
+                         <p className='info centered'>{s.stepid}</p>
+                         <div className='info'><p className="centered"><b>{s.title}</b></p><p>{s.description}</p></div>
+                         <p className='info centered'>{s.time}</p>
                         </>
                     ))
                     }
