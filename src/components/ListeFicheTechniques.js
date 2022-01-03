@@ -28,8 +28,11 @@ export default function ListeFicheTechniques() {
         <>
         <Helmet><title>Liste des Fiches Techniques</title></Helmet>
         <div>
-            <input type="text" onChange={(ev) => setSearch(ev.target.value)} placeholder="Recherche par libellé"></input>
-            <button onClick={() => searchFichesTechniques()}>Search</button>
+            <div className="mercurial-header-div">
+                <input className="mercurial-search-input" type="text" onChange={(ev) => setSearch(ev.target.value)} placeholder="Recherche par libellé"></input>
+                <button className="mercurial-search-button" onClick={() => searchFichesTechniques()}>Search</button>
+                <a className='mercurial-add-link' href='/fichetechniques/add'><button className="mercurial-add-button">Ajouter</button></a>
+            </div>
             <table className="mercurial-table">
                 <thead className="mercurial-thead">
                 <tr>

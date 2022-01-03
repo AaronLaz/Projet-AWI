@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import './FicheTechnique.css';
 import { useReactToPrint } from 'react-to-print'; 
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import { getFicheTechnique } from '../api/fichetechnique.api';
 
 export default function FicheTechnique() {
@@ -9,12 +10,22 @@ export default function FicheTechnique() {
     const [fichetechnique,setFicheTechnique] = useState([]);
     const [step, setStep] = useState([]);
     const [ingredient, setIngredient] = useState([]);
+    const history = useHistory();
 
     const referencePDF = useRef();
     const toPDF = useReactToPrint({
         content: () => referencePDF.current
     });
     const { id } = useParams();
+
+    const navStep = () => {
+        const url = `/fichetechnique/addStep/${id}`;
+        history.push(url);
+    }
+    const navIngredient = () => {
+        const url = `/fichetechnique/addIngredient/${id}`;
+        history.push(url);
+    }
 
     useEffect(() => {
         getFicheTechnique(id).then((result) => {
@@ -26,6 +37,7 @@ export default function FicheTechnique() {
           });
         });// eslint-disable-next-line react-hooks/exhaustive-deps
       }, []);
+      
     return (
         <><div className='container' ref={referencePDF}>
             <div>
@@ -75,6 +87,7 @@ export default function FicheTechnique() {
                 <h4>PRIX DE VENTE</h4>
             </div>
         </div>
-        <button onClick={() => toPDF()}>Print</button></>
+        <button onClick={() => toPDF()}>Print</button>
+        <button className='FormSubmit' onClick={() => navStep()}>Ajouter une étape à la Fiche Technique</button></>
     );
 }
