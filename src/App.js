@@ -13,6 +13,8 @@ import AddStock from './components/AddStock';
 import AddFicheTechnique from './components/AddFicheTechnique';
 import AddStepToFicheTechnique from './components/AddStepToFicheTechnique';
 import AddIngredientToStep from './components/AddIngredientToStep';
+import Costs from './components/Costs';
+import EditCosts from './components/EditCosts';
 
 
 
@@ -29,7 +31,20 @@ function App() {
   return (
     <div>
       <Router>
-        <Route exact path={['/', '/mercurial', '/mercurial/add','/fichetechnique/:id','/fichetechniques','/listeallergenes','/ingredient/:id','/ingredient/update/:id','/ingredient/addstock/:id', '/fichetechniques/add', "/fichetechnique/addStep/:id", "/fichetechnique/addIngredient/:id"]}>
+        <Route exact path={['/', 
+        '/mercurial', 
+        '/mercurial/add',
+        '/fichetechnique/:id',
+        '/fichetechniques',
+        '/listeallergenes',
+        '/ingredient/:id',
+        '/ingredient/update/:id',
+        '/ingredient/addstock/:id', 
+        '/fichetechniques/add', 
+        "/fichetechnique/addStep/:id", 
+        "/fichetechnique/addIngredient/:id",
+        "/couts",
+        "/couts/edit"]}>
           <div>
             <Menu/>
           </div>
@@ -46,6 +61,8 @@ function App() {
             <Route exact path="/fichetechniques/add" component={AddFicheTechnique}/>
             <Route exact path="/fichetechnique/addStep/:id" component={AddStepToFicheTechnique}/>
             <Route exact path="/fichetechnique/addIngredient/:id" component={AddIngredientToStep}/>
+            <Route exact path="/couts" component={Costs}/>
+            <Route exact path="/couts/edit" component={EditCosts}/>
           </div>
         </Route>
       </Router>

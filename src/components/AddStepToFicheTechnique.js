@@ -11,6 +11,7 @@ export default function AddStepToFicheTechnique() {
     const [title, setTitle] = useState();
     const [description, setDescription] = useState();
     const [time, setTime] = useState();
+    const [rank, setRank] = useState();
     const history = useHistory();
     const { id } = useParams();
 
@@ -29,6 +30,7 @@ export default function AddStepToFicheTechnique() {
         const join = {
             "docid":id,
             "stepid":stepid,
+            "rank":rank,
         };
         addStep(step).then((result) => {addStepToFicheTechnique(join).then((result) => {navDetail();})});
     }
@@ -61,6 +63,12 @@ export default function AddStepToFicheTechnique() {
                     <div className='gridrow'>
                         <label className='FormLabel' for="time">Temps</label>
                         <input className='FormInput' type="number" name="time" step="1" placeholder="0" onChange={(event) => setTime(event.target.value)} />
+                    </div>
+                </div>
+                <div className='blockForm'>
+                    <div className='gridrow'>
+                        <label className='FormLabel' for="rank">Phase</label>
+                        <input className='FormInput' type="number" name="rank" step="1" placeholder="0" onChange={(event) => setRank(event.target.value)} />
                     </div>
                 </div>
                 <button className='FormSubmit' onClick={() => submitHeader()}>Ajouter l'étape à la Fiche Technique</button>

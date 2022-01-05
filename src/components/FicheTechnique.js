@@ -73,7 +73,7 @@ export default function FicheTechnique() {
                     <h4 className='title'>DUREE</h4>
                     {step.map((s) => (
                         <>
-                         <p className='info centered'>{s.stepid}</p>
+                         <p className='info centered'>{s.rank}</p>
                          <div className='info'><p className="centered"><b>{s.title}</b></p><p>{s.description}</p></div>
                          <p className='info centered'>{s.time}</p>
                         </>

@@ -55,7 +55,7 @@ export default class Menu extends Component {
                                 </li>
                                 <li className="nav-header">Finances</li>
                                 <li className="nav-item">
-                                    <a href="/" className="nav-link">
+                                    <a href="/couts" className="nav-link">
                                         <i className="nav-icon fas fa-chart-pie" />
                                         <p>
                                             Couts

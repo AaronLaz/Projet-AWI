@@ -101,6 +101,7 @@ export async function addStepToFicheTechnique(data){
                 data: {
                     "docid": data.docid,
                     "stepid": data.stepid,
+                    "rank": data.rank,
                 }
             };
             axios(url, config).then((result) => {
