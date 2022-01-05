@@ -1,79 +1,82 @@
 import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import './FicheTechnique.css';
-import { addFicheTechnique } from '../api/fichetechnique.api';
+import { addIngredientToStep, getFicheTechnique } from '../api/fichetechnique.api';
+import { getIngredients } from '../api/ingredient.api';
 
 export default function AddIngredientToStep() {
-
-    const [id, setId] = useState();
-    const [name, setName] = useState();
-    const [header, setHeader] = useState();
-    const [author, setAuthor] = useState();
-    const [responsable, setResponsable] = useState();
-    const [nbserved, setNbserved] = useState();
+    const [steps, setSteps] = useState([]);
+    const [ingredients, setIngredients] = useState([]);
+    const [stepid, setStepId] = useState();
+    const [ingredientcode, setCode] = useState();
+    const [quantity, setQuantity] = useState();
     const history = useHistory();
+    const { id } = useParams();
 
     const navDetail = () => {
         const url = `/fichetechnique/${id}`;
         history.push(url);
     }
 
-    const submitHeader = () => {
-        const techdoc = {
-            "id":id,
-            "name":name,
-            "header":header,
-            "author":author,
-            "responsable":responsable,
-            "nbserved":nbserved
-        };
-        addFicheTechnique(techdoc).then((result) => {navDetail();});
+    const submit = () => {
+        if(stepid == undefined || ingredientcode == undefined || quantity == ""){
+            window.alert("Attention! Il faut obligatoirement séléctionner une étape, un ingrédient et une quantité.")
+        }else{
+            const join = {
+                "stepid":stepid,
+                "ingredientcode":ingredientcode,
+                "quantity":quantity,
+            };
+            addIngredientToStep(join).then((result) => {navDetail();});
+        }
     }
+
+    useEffect(() => {
+        getIngredients().then((result)  => {
+            setIngredients(result);
+        })
+        getFicheTechnique(id).then((result) => {
+            setSteps(result.steps);
+        })
+      }, []);
 
     return (
         <>
-        <Helmet>Ajouter Fiche Technique</Helmet>
+        <Helmet>Ajouter Une Etape la Fiche Technique</Helmet>
         <div className='FormContainer'>
             <div className='Form'>
-                <h3>Ajouter Entête de Fiche Technique</h3>
-                <div className='blockForm'>
+                <h3>Ajouter Un Ingrédient à l'étape</h3>
+                <div>
+                    <label for="steps">Selectionnez l'étape : </label>
+                    <select name="steps" id="steps" onChange={(event) => setStepId(event.target.value)}>
+                        <option>Aucun</option>
+                        {steps.map((s) => (
+                            <>
+                            <option key={s.stepid} value={s.stepid}>{s.title}</option>
+                            </>
+                        ))}
+                    </select>
+                </div>
+                <div>
+                    <label for="ingredients">Selectionnez l'ingrédient : </label>
+                    <select name="ingredients" id="ingredients" onChange={(event) => setCode(event.target.value)}>
+                        <option>Aucun</option>
+                        {ingredients.map((i) => (
+                            <>
+                            <option key={i.code} value={i.code}>{i.libelle}</option>
+                            </>
+                        ))}
+                    </select>
+                </div>
+                <div>
                     <div className='gridrow'>
-                        <label className='FormLabel' for="id">ID</label>
-                        <input className='FormInput' placeholder="ID" id="id" type="number" onChange={(event) => setId(event.target.value)} />
+                        <label className='FormLabel' for="quantity">Quantité</label>
+                        <input className='FormInput' placeholder="1" id="quantity" type="number" onChange={(event) => setQuantity(event.target.value)} />
                     </div>
                 </div>
-                <div className='blockForm'>
-                    <div className='gridrow'>
-                        <label className='FormLabel' for="name">Nom</label>
-                        <input className='FormInput' placeholder="Nom" id="name" type="text" onChange={(event) => setName(event.target.value)} />
-                    </div>
-                </div>
-                <div className='blockForm'>
-                    <div className='gridrow'>
-                        <label className='FormLabel' for="header">Description</label>
-                        <input className='FormInput' placeholder="Description" id="header" type="text" onChange={(event) => setHeader(event.target.value)} />
-                    </div>
-                </div>
-                <div className='blockForm'>
-                    <div className='gridrow'>
-                        <label className='FormLabel' for="author">Auteur</label>
-                        <input className='FormInput' type="text" name="author" placeholder="Auteur" onChange={(event) => setAuthor(event.target.value)} />
-                    </div>
-                </div>
-                <div className='blockForm'>
-                    <div className='gridrow'>
-                        <label className='FormLabel' for="responsable">Responsable</label>
-                        <input className='FormInput' type="text" name="responsable" placeholder="Responsable" onChange={(event) => setResponsable(event.target.value)} />
-                    </div>
-                </div>
-                <div className='blockForm'>
-                    <div className='gridrow'>
-                        <label className='FormLabel' for='nbserved'>Nombre Servi</label>
-                        <input className='FormInput' name="nbserved" type="number" step="1" placeholder="1" onChange={(event) => setNbserved(event.target.value)} />
-                    </div>
-                </div>
-                <button className='FormSubmit' onClick={() => submitHeader()}>Ajouter l'entête de Fiche Technique</button>
+                <button className='FormSubmit' onClick={() => submit()}>Ajouter l'ingrédient à l'étape'</button>
             </div>
         </div>
         </>

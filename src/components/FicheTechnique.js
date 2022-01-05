@@ -88,6 +88,7 @@ export default function FicheTechnique() {
             </div>
         </div>
         <button onClick={() => toPDF()}>Print</button>
-        <button className='FormSubmit' onClick={() => navStep()}>Ajouter une étape à la Fiche Technique</button></>
+        <button className='FormSubmit' onClick={() => navStep()}>Ajouter une étape à la Fiche Technique</button>
+        <button className='FormSubmit' onClick={() => navIngredient()}>Ajouter une un ingrédient à une étape</button></>
     );
 }
