@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 import { getFicheTechniques } from '../api/fichetechnique.api';
+import { Loading } from './loading';
 import './Table.css'
 
 
@@ -10,12 +11,14 @@ export default function ListeFicheTechniques() {
     const [FicheTechniques, setFicheTechniques] = useState([]);
     const [search, setSearch] = useState('');
     const [results, setResults] = useState([]);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         getFicheTechniques().then((result) => {
           setFicheTechniques(result);
           setResults(result);
         });
+        setTimeout(() => setLoading(true),1000);
       }, []);
 
     const searchFichesTechniques = () => {
@@ -25,12 +28,15 @@ export default function ListeFicheTechniques() {
       }
 
     return(
+        loading ?
         <>
         <Helmet><title>Liste des Fiches Techniques</title></Helmet>
         <div>
             <div className="mercurial-header-div">
-                <input className="mercurial-search-input" type="text" onChange={(ev) => setSearch(ev.target.value)} placeholder="Recherche par libellé"></input>
-                <button className="mercurial-search-button" onClick={() => searchFichesTechniques()}>Search</button>
+                <div>
+                   <input className="mercurial-search-input" type="text" onChange={(ev) => setSearch(ev.target.value)} placeholder="Recherche par libellé"></input>
+                    <button className="mercurial-search-button" onClick={() => searchFichesTechniques()}>Search</button> 
+                </div>
                 <a className='mercurial-add-link' href='/fichetechniques/add'><button className="mercurial-add-button">Ajouter</button></a>
             </div>
             <table className="mercurial-table">
@@ -61,5 +67,6 @@ export default function ListeFicheTechniques() {
             </table>
         </div>
         </>
+        : <Loading></Loading>
     );
 }

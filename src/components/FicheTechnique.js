@@ -4,6 +4,7 @@ import './FicheTechnique.css';
 import { useReactToPrint } from 'react-to-print'; 
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import { getFicheTechnique } from '../api/fichetechnique.api';
+import { Loading } from './loading';
 
 export default function FicheTechnique() {
 
@@ -28,12 +29,14 @@ export default function FicheTechnique() {
     useEffect(() => {
         getFicheTechnique(id).then((result) => {
           setFicheTechnique(result);
-          setLoading(true);
-        });// eslint-disable-next-line react-hooks/exhaustive-deps
+        });
+        setTimeout(() => setLoading(true),1000);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
       }, []);
     
     return (
-        loading ? <><div className='container' ref={referencePDF}>
+        loading ? 
+        <><div className='container' ref={referencePDF}>
             <div>
                 <h3>FICHE TECHNIQUE</h3>
             </div>
@@ -92,6 +95,7 @@ export default function FicheTechnique() {
         </div>
         <button onClick={() => toPDF()}>Print</button>
         <button className='FormSubmit' onClick={() => navStep()}>Ajouter une étape à la Fiche Technique</button>
-        <button className='FormSubmit' onClick={() => navIngredient()}>Ajouter une un ingrédient à une étape</button></>: null
+        <button className='FormSubmit' onClick={() => navIngredient()}>Ajouter une un ingrédient à une étape</button></>
+        : <Loading></Loading>
     );
 }
