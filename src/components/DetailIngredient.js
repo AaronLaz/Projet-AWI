@@ -3,16 +3,20 @@ import { Helmet } from 'react-helmet';
 import { useParams, useHistory } from 'react-router-dom';
 import { getIngredient, supprIngredient } from '../api/ingredient.api';
 import './IngredientForm.css';
+import { Loading } from './loading';
 
 export default function DetailIngredient() {
     const [ingredient, setIngredient] = useState([]);
     const { id } = useParams();
     const history = useHistory();
+    const [loading,setLoading] = useState(false);
 
     useEffect(() => {
         getIngredient(id).then((result) => {
             setIngredient(result);
-        });// eslint-disable-next-line react-hooks/exhaustive-deps
+        });
+        setTimeout(() => setLoading(true),1500);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     
     
@@ -36,7 +40,7 @@ export default function DetailIngredient() {
     }
 
     return (
-        <>
+        loading ? <>
         <Helmet>Detail Ingredient</Helmet>
         <div className='FormContainer'>
             <div className='Form'>
@@ -81,6 +85,6 @@ export default function DetailIngredient() {
                 <button className="ModifyButton" onClick={() => modifyIngredient()}>Modifier</button>
                 <button className="AddButton" onClick={() => addStock()}>Ajouter du stock</button>
             </div>
-        </div></>
+        </div></> : <Loading></Loading>
     )
 }

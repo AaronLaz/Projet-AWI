@@ -2,11 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 import { getIngredients } from '../api/ingredient.api';
+import { Loading } from './loading';
 
 export default function ListeAllergenes() {
   const [ingredients, setIngredients] = useState([]);
   const [search, setSearch] = useState('');
   const [results, setResults] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const searchIngredients = () => {
     const regex = new RegExp(search.toLowerCase());
@@ -27,9 +29,11 @@ export default function ListeAllergenes() {
       setIngredients(result.filter(ingredient => ingredient.allergene === 1));
       setResults(result.filter(ingredient => ingredient.allergene === 1));
     });
+    setTimeout(() => setLoading(true),1000);
   }, []);
 
   return (
+    loading ?
     <><Helmet>Mercurial</Helmet>
     <div style={{ height: 400, width: '100%' }}>
     <div className="mercurial-header-div">
@@ -68,5 +72,6 @@ export default function ListeAllergenes() {
         </tbody>
       </table>
     </div></>
+    : <Loading></Loading>
   );
 }

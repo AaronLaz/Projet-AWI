@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 import { getIngredients } from '../api/ingredient.api';
+import { Loading } from './loading';
 import './Table.css';
 
 export default function Table() {
   const [ingredients, setIngredients] = useState([]);
   const [search, setSearch] = useState('');
   const [results, setResults] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const searchIngredients = () => {
     const regex = new RegExp(search.toLowerCase());
@@ -28,9 +30,11 @@ export default function Table() {
       setIngredients(result);
       setResults(result);
     });
+    setTimeout(() => setLoading(true),1000);
   }, []);
 
   return (
+    loading ?
     <><Helmet>Mercurial</Helmet>
     <div style={{ height: 400, width: '100%' }}>
       <div className="mercurial-header-div">
@@ -68,6 +72,6 @@ export default function Table() {
           ))}
         </tbody>
       </table>
-    </div></>
+    </div></> : <Loading></Loading>
   );
 }
