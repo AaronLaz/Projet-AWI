@@ -28,3 +28,9 @@
     background-color: aliceblue;
     border: 1px solid;
 }
+
+
+th {
+    padding: 10px;
+    min-width: 100px;
+}
