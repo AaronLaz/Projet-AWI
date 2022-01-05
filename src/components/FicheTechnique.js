@@ -7,11 +7,9 @@ import { getFicheTechnique } from '../api/fichetechnique.api';
 
 export default function FicheTechnique() {
 
-    const [fichetechnique,setFicheTechnique] = useState([]);
-    const [step, setStep] = useState([]);
-    const [ingredient, setIngredient] = useState([]);
+    const [fichetechnique,setFicheTechnique] = useState();
     const history = useHistory();
-
+    const [loading, setLoading] = useState(false);
     const referencePDF = useRef();
     const toPDF = useReactToPrint({
         content: () => referencePDF.current
@@ -30,16 +28,12 @@ export default function FicheTechnique() {
     useEffect(() => {
         getFicheTechnique(id).then((result) => {
           setFicheTechnique(result);
-          setStep(result.steps);// eslint-disable-next-line
-          result.steps.map((s)=>{
-              ingredient.push(s.ingredients);
-              setIngredient(ingredient.slice(0));
-          });
+          setLoading(true);
         });// eslint-disable-next-line react-hooks/exhaustive-deps
       }, []);
-      
+    
     return (
-        <><div className='container' ref={referencePDF}>
+        loading ? <><div className='container' ref={referencePDF}>
             <div>
                 <h3>FICHE TECHNIQUE</h3>
             </div>
@@ -47,40 +41,49 @@ export default function FicheTechnique() {
                 <h4 className='title'>INTITULE</h4>
                 <h4 className='title'>RESPONSABLE</h4>
                 <h4 className='title'>NBRE DE COUVERTS</h4>
-                <p className='info'>{fichetechnique.name}</p>
-                <p className='info'>{fichetechnique.responsable}</p>
-                <p className='info'>{fichetechnique.nbserved}</p>
+                <p className='info centered'>{fichetechnique.name}</p>
+                <p className='info centered'>{fichetechnique.responsable}</p>
+                <p className='info centered'>{fichetechnique.nbserved}</p>
             </div>
             <div className="grid2">
-                <div className='grid1'>
-                    <h4 className='title'>DENREES</h4>
-                    <h4 className='title'>UNITES</h4>
-                    <h4 className='title'>QUANTITES</h4>
-                    {ingredient.forEach((s2) => {
-                        s2.forEach(i => (
-                        <>
-                         <p className='info centered'>{i.libelle}</p>
-                         <p className='info centered'>{i.unit}</p>
-                         <p className='info centered'>{i.quantity}</p>
-                        </>
-                        ));
-                    })}
-                    
-                </div>
-                <div className='grid1'>
-                    <h4 className='title'>N° PHASE</h4>
-                    <h4 className='title'>TECHNIQUES DE REALISATION</h4>
-                    <h4 className='title'>DUREE</h4>
-                    {step.map((s) => (
-                        <>
-                         <p className='info centered'>{s.rank}</p>
-                         <div className='info'><p className="centered"><b>{s.title}</b></p><p>{s.description}</p></div>
-                         <p className='info centered'>{s.time}</p>
-                        </>
+                <table>
+                    <thead>
+                        <tr>
+                            <th className='title'>DENREES</th>
+                            <th className='title'>UNITES</th>
+                            <th className='title'>QUANTITES</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {fichetechnique.steps.map((step) => 
+                        step.ingredients.map((i) =>(
+                        <tr>
+                         <td className='info centered'>{i.libelle}</td>
+                         <td className='info centered'>{i.unit}</td>
+                         <td className='info centered'>{i.quantity}</td>
+                        </tr>
+                    )))}
+                    </tbody>
+                </table>
+                <table>
+                    <thead>
+                        <tr>
+                            <th className='title'>N° PHASE</th>
+                            <th className='title'>TECHNIQUES DE REALISATION</th>
+                            <th className='title'>DUREE</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {fichetechnique.steps.map((s) => (
+                        <tr>
+                         <td className='info centered'>{s.rank}</td>
+                         <td className='info'><p className="centered"><b>{s.title}</b></p><p>{s.description}</p></td>
+                         <td className='info centered'>{s.time}</td>
+                        </tr>
                     ))
                     }
-                        
-                </div>
+                    </tbody>
+                </table>
             </div>
             <div>
                 <h4>COUTS DE PRODUCTION</h4>
@@ -89,6 +92,6 @@ export default function FicheTechnique() {
         </div>
         <button onClick={() => toPDF()}>Print</button>
         <button className='FormSubmit' onClick={() => navStep()}>Ajouter une étape à la Fiche Technique</button>
-        <button className='FormSubmit' onClick={() => navIngredient()}>Ajouter une un ingrédient à une étape</button></>
+        <button className='FormSubmit' onClick={() => navIngredient()}>Ajouter une un ingrédient à une étape</button></>: null
     );
 }
