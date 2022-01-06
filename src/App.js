@@ -15,6 +15,7 @@ import AddStepToFicheTechnique from './components/AddStepToFicheTechnique';
 import AddIngredientToStep from './components/AddIngredientToStep';
 import Costs from './components/Costs';
 import EditCosts from './components/EditCosts';
+import { Label } from './components/Label';
 
 
 
@@ -44,7 +45,8 @@ function App() {
         "/fichetechnique/addStep/:id", 
         "/fichetechnique/addIngredient/:id",
         "/couts",
-        "/couts/edit"]}>
+        "/couts/edit",
+        "/labels"]}>
           <div>
             <Menu/>
           </div>
@@ -63,6 +65,7 @@ function App() {
             <Route exact path="/fichetechnique/addIngredient/:id" component={AddIngredientToStep}/>
             <Route exact path="/couts" component={Costs}/>
             <Route exact path="/couts/edit" component={EditCosts}/>
+            <Route exact path="/labels" component={Label}/>
           </div>
         </Route>
       </Router>

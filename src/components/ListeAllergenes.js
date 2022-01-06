@@ -59,14 +59,14 @@ export default function ListeAllergenes() {
         <tbody>
           {results.map((i) => (
             <tr key={i.code}>
-            <th className="mercurial-thead-th">{i.code}</th>
-            <th className="mercurial-tbody-th">{i.libelle}</th>
-            <th className="mercurial-thead-th">{i.unit}</th>
-            <th className="mercurial-thead-th">{i.unitprice}€</th>
-            <th className="mercurial-thead-th">{i.stocks}</th>
-            <th className="mercurial-thead-th">{i.stockvalue}€</th>
-            <th className="mercurial-thead-th">{toBoolean(i.allergene)}</th>
-            <th className="mercurial-thead-th"><Link to={`/ingredient/${i.code}`}>Voir</Link></th>
+            <td className="mercurial-thead-th">{i.code}</td>
+            <td className="mercurial-tbody-th">{i.libelle}</td>
+            <td className="mercurial-thead-th">{i.unit}</td>
+            <td className="mercurial-thead-th">{i.unitprice}€</td>
+            <td className="mercurial-thead-th">{i.stocks}</td>
+            <td className="mercurial-thead-th">{i.stockvalue}€</td>
+            <td className="mercurial-thead-th">{toBoolean(i.allergene)}</td>
+            <td className="mercurial-thead-th"><Link to={`/ingredient/${i.code}`}>Voir</Link></td>
           </tr>
         ))}
         </tbody>
