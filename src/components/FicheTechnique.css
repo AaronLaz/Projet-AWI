@@ -36,3 +36,7 @@ th, td {
     max-width: 500px;
     hyphens: auto;
 }
+
+.FormSubmitDanger {
+    color: red;
+}

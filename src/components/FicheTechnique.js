@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import './FicheTechnique.css';
 import { useReactToPrint } from 'react-to-print'; 
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
-import { getFicheTechnique, editFicheTechnique } from '../api/fichetechnique.api';
+import { getFicheTechnique, editFicheTechnique, deleteFicheTechnique, deleteFicheTechniqueStep } from '../api/fichetechnique.api';
 import { getCosts } from '../api/costs.api';
 import { Loading } from './loading';
 
@@ -28,6 +28,10 @@ export default function FicheTechnique() {
         const url = `/fichetechnique/addIngredient/${id}`;
         history.push(url);
     }
+    const navList = () => {
+        const url = `/fichetechniques`;
+        history.push(url);
+    }
     const toInt = (val) => {
         if(val){
             return 1;
@@ -47,8 +51,24 @@ export default function FicheTechnique() {
             "default":toInt(def),
             "usecharges":toInt(usecharges),
         }
-        console.log(data);
         editFicheTechnique(data);
+    }
+
+    const deleteFiche = () => {
+        const data = {
+            "id": parseInt(id),
+        }
+        fichetechnique.steps.forEach((step) => {
+            console.log(step);
+            const d = {
+                "stepid": parseInt(step.stepid),
+            }
+            deleteFicheTechniqueStep(d);
+        })
+        console.log(data);
+        deleteFicheTechnique(data).then((result) => {
+            navList();
+        });
     }
 
     useEffect(() => {
@@ -136,7 +156,8 @@ export default function FicheTechnique() {
             <button onClick={() => commitChanges()}>Confirmer</button>
         </div>
         <button className='FormSubmit' onClick={() => navStep()}>Ajouter une étape à la Fiche Technique</button>
-        <button className='FormSubmit' onClick={() => navIngredient()}>Ajouter une un ingrédient à une étape</button></>
+        <button className='FormSubmit' onClick={() => navIngredient()}>Ajouter une un ingrédient à une étape</button>
+        <button className='FormSubmitDanger' onClick={() => deleteFiche()}>Supprimer</button></>
         : <Loading></Loading>
     );
 }

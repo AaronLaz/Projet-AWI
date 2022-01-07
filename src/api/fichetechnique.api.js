@@ -99,6 +99,50 @@ export async function editFicheTechnique(data){
     })
 }
 
+export async function deleteFicheTechnique(data){
+    return new Promise((resolve, reject) => {
+        try {
+            const url = `https://awi-backend.herokuapp.com/technicaldoc/delete`;
+            const config = {
+                method: 'delete',
+                headers: {
+                    'Content-Type': 'application/json' 
+                },
+                data: {
+                    "id": data.id,
+                }
+            };
+            axios(url, config).then((result) => {
+                resolve(result.data);
+            });
+        } catch (err) {
+            reject(err);
+        }
+    })
+}
+
+export async function deleteFicheTechniqueStep(data){
+    return new Promise((resolve, reject) => {
+        try {
+            const url = `https://awi-backend.herokuapp.com/technicaldoc/delete/step`;
+            const config = {
+                method: 'delete',
+                headers: {
+                    'Content-Type': 'application/json' 
+                },
+                data: {
+                    "stepid": data.stepid,
+                }
+            };
+            axios(url, config).then((result) => {
+                resolve(result.data);
+            });
+        } catch (err) {
+            reject(err);
+        }
+    })
+}
+
 export async function addStep(step){
     return new Promise((resolve, reject) => {
         try {
