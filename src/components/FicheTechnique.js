@@ -3,12 +3,15 @@ import { useParams } from 'react-router-dom';
 import './FicheTechnique.css';
 import { useReactToPrint } from 'react-to-print'; 
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
-import { getFicheTechnique } from '../api/fichetechnique.api';
+import { getFicheTechnique, editFicheTechnique } from '../api/fichetechnique.api';
+import { getCosts } from '../api/costs.api';
 import { Loading } from './loading';
 
 export default function FicheTechnique() {
-
-    const [fichetechnique,setFicheTechnique] = useState();
+    const [costs, setCosts] = useState();
+    const [fichetechnique, setFicheTechnique] = useState();
+    const [def,setDef] = useState([]);
+    const [usecharges, setUseCharges] = useState([]);
     const history = useHistory();
     const [loading, setLoading] = useState(false);
     const referencePDF = useRef();
@@ -25,11 +28,38 @@ export default function FicheTechnique() {
         const url = `/fichetechnique/addIngredient/${id}`;
         history.push(url);
     }
+    const toInt = (val) => {
+        if(val){
+            return 1;
+        }else{
+            return 0;
+        }
+    }
+    const commitChanges = () => {
+        const data = {
+            "id":id.toString(),
+            "name":fichetechnique.name,
+            "header":fichetechnique.header,
+            "author":fichetechnique.author,
+            "responsable":fichetechnique.responsable,
+            "category":fichetechnique.category,
+            "nbserved":fichetechnique.nbserved,
+            "default":toInt(def),
+            "usecharges":toInt(usecharges),
+        }
+        console.log(data);
+        editFicheTechnique(data);
+    }
 
     useEffect(() => {
         getFicheTechnique(id).then((result) => {
-          setFicheTechnique(result);
+            setFicheTechnique(result);
+            setDef(result.default);
+            setUseCharges(result.usecharges);
         });
+        getCosts().then((result) => {
+            setCosts(result);
+        })
         setTimeout(() => setLoading(true),1000);
         // eslint-disable-next-line react-hooks/exhaustive-deps
       }, []);
@@ -80,7 +110,7 @@ export default function FicheTechnique() {
                         {fichetechnique.steps.map((s) => (
                         <tr>
                          <td className='info centered'>{s.rank}</td>
-                         <td className='info'><p className="centered"><b>{s.title}</b></p><p>{s.description}</p></td>
+                         <td className='info'><p className="centered"><b>{s.title}</b></p><p>{s.header}</p></td>
                          <td className='info centered'>{s.time}</td>
                         </tr>
                     ))
@@ -94,6 +124,17 @@ export default function FicheTechnique() {
             </div>
         </div>
         <button onClick={() => toPDF()}>Print</button>
+        <div>
+            <div className='gridrow'>
+                <label className='FormLabel' for="charges">Utiliser charges par défaut?</label>
+                <input className='FormInput' checked={def} id="charges" type="checkbox" onChange={(event) => setDef(event.target.checked)} />
+            </div>
+            <div className='gridrow'>
+                <label className='FormLabel' for="charges">Utiliser charges</label>
+                <input disabled={def} className='FormInput' checked={usecharges} id="charges" type="checkbox" onChange={(event) => setUseCharges(event.target.checked)} />
+            </div>
+            <button onClick={() => commitChanges()}>Confirmer</button>
+        </div>
         <button className='FormSubmit' onClick={() => navStep()}>Ajouter une étape à la Fiche Technique</button>
         <button className='FormSubmit' onClick={() => navIngredient()}>Ajouter une un ingrédient à une étape</button></>
         : <Loading></Loading>

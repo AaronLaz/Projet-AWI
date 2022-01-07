@@ -6,6 +6,10 @@ import './Table.css';
 
 export default function Costs() {
   const [costs, setCosts] = useState([]);
+
+  const toBoolean = (value) => {
+    return (value==1).toString();
+  }
   
   useEffect(() => {
     getCosts().then((result) => {
@@ -22,6 +26,9 @@ export default function Costs() {
       <div>
         <p>Couts des fluides : {costs.fluides}€ / h</p>
         <p>Couts du personnel : {costs.personnel}€ / h</p>
+        <p>Markup : {costs.markup}%</p>
+        <p>Markup without charges : {costs.markupnocharges}%</p>
+        <p>Charges ? {toBoolean(costs.charges)}</p>
       </div>
     </div></>
   );

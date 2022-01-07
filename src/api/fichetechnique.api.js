@@ -24,7 +24,7 @@ export async function getFicheTechnique(id) {
             const url = `https://awi-backend.herokuapp.com/technicaldoc/get/${id}`;
             const config = {
                 method: 'get',
-                headers: { 
+                headers: {
                     'Content-Type': 'application/json' 
                 },
             };
@@ -39,6 +39,7 @@ export async function getFicheTechnique(id) {
 
 export async function addFicheTechnique(techdoc){
     return new Promise((resolve, reject) => {
+        console.log(techdoc);
         try {
             const url = `https://awi-backend.herokuapp.com/technicaldoc/post/header`;
             const config = {
@@ -49,10 +50,44 @@ export async function addFicheTechnique(techdoc){
                 data: {
                     "id": techdoc.id,
                     "name": techdoc.name,
-                    "description": techdoc.header,
+                    "header": techdoc.header,
                     "author": techdoc.author,
                     "responsable": techdoc.responsable,
+                    "category": techdoc.category,
                     "nbserved": techdoc.nbserved,
+                    "default": techdoc.default,
+                    "usecharges": techdoc.usecharges,
+                }
+            };
+            axios(url, config).then((result) => {
+                resolve(result.data);
+                console.log(result);
+            });
+        } catch (err) {
+            reject(err);
+        }
+    })
+}
+
+export async function editFicheTechnique(data){
+    return new Promise((resolve, reject) => {
+        try {
+            const url = `https://awi-backend.herokuapp.com/technicaldoc/put/header`;
+            const config = {
+                method: 'put',
+                headers: {
+                    'Content-Type': 'application/json' 
+                },
+                data: {
+                    "id": data.id,
+                    "name": data.name,
+                    "header": data.header,
+                    "author": data.author,
+                    "responsable": data.responsable,
+                    "category": data.category,
+                    "nbserved": data.nbserved,
+                    "default": data.default,
+                    "usecharges": data.usecharges,
                 }
             };
             axios(url, config).then((result) => {
@@ -76,7 +111,7 @@ export async function addStep(step){
                 data: {
                     "id": step.stepid,
                     "title": step.title,
-                    "description": step.description,
+                    "header": step.header,
                     "time": step.time,
                 }
             };

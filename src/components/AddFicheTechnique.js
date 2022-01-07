@@ -12,6 +12,7 @@ export default function AddFicheTechnique() {
     const [author, setAuthor] = useState();
     const [responsable, setResponsable] = useState();
     const [nbserved, setNbserved] = useState();
+    const [category, setCategory] = useState();
     const history = useHistory();
 
     const navDetail = () => {
@@ -21,12 +22,15 @@ export default function AddFicheTechnique() {
 
     const submitHeader = () => {
         const techdoc = {
-            "id":id,
+            "id":parseInt(id),
             "name":name,
             "header":header,
             "author":author,
             "responsable":responsable,
-            "nbserved":nbserved
+            "category":category,
+            "nbserved":parseInt(nbserved),
+            "default":1,
+            "usecharges":0,
         };
         addFicheTechnique(techdoc).then((result) => {navDetail();});
     }
@@ -51,8 +55,8 @@ export default function AddFicheTechnique() {
                 </div>
                 <div className='blockForm'>
                     <div className='gridrow'>
-                        <label className='FormLabel' for="header">Description</label>
-                        <input className='FormInput' placeholder="Description" id="header" type="text" onChange={(event) => setHeader(event.target.value)} />
+                        <label className='FormLabel' for="header">header</label>
+                        <input className='FormInput' placeholder="header" id="header" type="text" onChange={(event) => setHeader(event.target.value)} />
                     </div>
                 </div>
                 <div className='blockForm'>
@@ -69,11 +73,17 @@ export default function AddFicheTechnique() {
                 </div>
                 <div className='blockForm'>
                     <div className='gridrow'>
+                        <label className='FormLabel' for="category">Catégorie</label>
+                        <input className='FormInput' type="text" name="category" placeholder="Categorie" onChange={(event) => setCategory(event.target.value)} />
+                    </div>
+                </div>
+                <div className='blockForm'>
+                    <div className='gridrow'>
                         <label className='FormLabel' for='nbserved'>Nombre Servi</label>
                         <input className='FormInput' name="nbserved" type="number" step="1" placeholder="1" onChange={(event) => setNbserved(event.target.value)} />
                     </div>
                 </div>
-                <button className='FormSubmit' onClick={() => submitHeader()}>Ajouter l'entête de Fiche Technique</button>
+                <button className='FormSubmit' onClick={() => {submitHeader();}}>Ajouter l'entête de Fiche Technique</button>
             </div>
         </div>
         </>
