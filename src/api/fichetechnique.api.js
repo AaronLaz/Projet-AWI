@@ -29,6 +29,7 @@ export async function getFicheTechnique(id) {
                 },
             };
             axios.get(url, config).then((fichetechnique) => {
+                console.log(fichetechnique.data);
                 resolve(fichetechnique.data);
             });
         } catch (err) {
@@ -155,7 +156,7 @@ export async function addStep(step){
                 data: {
                     "id": step.stepid,
                     "title": step.title,
-                    "header": step.header,
+                    "description": step.description,
                     "time": step.time,
                 }
             };

@@ -105,6 +105,7 @@ export default function FicheTechnique() {
             if(costs.charges){
                 fichetechnique.steps.forEach((s) => {
                     sum += (s.time/60) * (costs.personnel);
+                    console.log(s.description);
                 })
             }
         }else{
@@ -117,8 +118,12 @@ export default function FicheTechnique() {
         return sum;
     }
 
+    const calculCoutAssaisonnement = () => {
+        return calculCoutMatiere() * 0.05;
+    }
+
     const totalCouts = () => {
-        return calculCoutChargesFluides() + calculCoutChargesPersonnel() + calculCoutMatiere();
+        return calculCoutChargesFluides() + calculCoutChargesPersonnel() + calculCoutMatiere() + calculCoutAssaisonnement();
     }
 
     const calculPrixVente = (byPortion) => {
@@ -208,7 +213,7 @@ export default function FicheTechnique() {
                         {fichetechnique.steps.map((s) => (
                         <tr>
                          <td className='info centered'>{s.rank}</td>
-                         <td className='info'><p className="centered"><b>{s.title}</b></p><p>{s.header}</p></td>
+                         <td className='info'><p className="centered"><b>{s.title}</b></p><p>{s.description}</p></td>
                          <td className='info centered'>{s.time}</td>
                         </tr>
                     ))
@@ -219,6 +224,7 @@ export default function FicheTechnique() {
             <div>
                 <h4>COUTS DE PRODUCTION</h4>
                 <p>Couts matière : {(calculCoutMatiere()).toFixed(2)}€</p>
+                <p>Cout assaisonnement : {(calculCoutAssaisonnement()).toFixed(2)}€</p>
                 <p>Couts fluides : {(calculCoutChargesFluides()).toFixed(2)}€</p>
                 <p>Couts personnel : {(calculCoutChargesPersonnel()).toFixed(2)}€</p>
                 <h4>PRIX DE VENTE</h4>
