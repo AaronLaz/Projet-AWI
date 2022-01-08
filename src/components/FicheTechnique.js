@@ -14,6 +14,7 @@ export default function FicheTechnique() {
     const [usecharges, setUseCharges] = useState([]);
     const history = useHistory();
     const [loading, setLoading] = useState(false);
+    const [checked, setChecked] = useState(false);
     const referencePDF = useRef();
     const toPDF = useReactToPrint({
         content: () => referencePDF.current
@@ -30,6 +31,18 @@ export default function FicheTechnique() {
     }
     const navList = () => {
         const url = `/fichetechniques`;
+        history.push(url);
+    }
+    const navEditStep = () => {
+        const url = `/fichetechnique/editStep/${id}`
+        history.push(url);
+    }
+    const navEditIngredient = () => {
+        const url = `/fichetechnique/editIngredient/${id}`
+        history.push(url);
+    }
+    const navEditFiche = () => {
+        const url = `/fichetechnique/edit/${id}`;
         history.push(url);
     }
     const toInt = (val) => {
@@ -50,6 +63,7 @@ export default function FicheTechnique() {
             "nbserved":fichetechnique.nbserved,
             "default":toInt(def),
             "usecharges":toInt(usecharges),
+            "assaisonemments":fichetechnique.assaisonemments,
         }
         editFicheTechnique(data);
     }
@@ -59,7 +73,6 @@ export default function FicheTechnique() {
             "id": parseInt(id),
         }
         fichetechnique.steps.forEach((step) => {
-            console.log(step);
             const d = {
                 "stepid": parseInt(step.stepid),
             }
@@ -105,7 +118,6 @@ export default function FicheTechnique() {
             if(costs.charges){
                 fichetechnique.steps.forEach((s) => {
                     sum += (s.time/60) * (costs.personnel);
-                    console.log(s.description);
                 })
             }
         }else{
@@ -119,7 +131,11 @@ export default function FicheTechnique() {
     }
 
     const calculCoutAssaisonnement = () => {
-        return calculCoutMatiere() * 0.05;
+        if(fichetechnique.assaisonemments <= 0){
+            return calculCoutMatiere() * 0.05;
+        }else{
+            return fichetechnique.assaisonemments;
+        }
     }
 
     const totalCouts = () => {
@@ -150,8 +166,17 @@ export default function FicheTechnique() {
 
     const calculBeneficeParPortion = () => {
         let couts = totalCouts();
-        let vente = calculPrixVente(true);
+        let vente = calculPrixVente(true) / 1.1;
         return vente - (couts / fichetechnique.nbserved)
+    }
+
+    const portionsVendusPourRentabilité = () => {
+        let chargesVar = calculCoutAssaisonnement() + calculCoutMatiere();
+        let chargesFix = calculCoutChargesFluides() + calculCoutChargesPersonnel();
+        let vente = calculPrixVente(true) / 1.1;
+        let mcv = (vente - chargesVar/fichetechnique.nbserved) / vente;
+        let result = chargesFix / mcv;
+        return Math.ceil(result);
     }
 
     useEffect(() => {
@@ -221,7 +246,7 @@ export default function FicheTechnique() {
                     </tbody>
                 </table>
             </div>
-            <div>
+            <div hidden={checked}>
                 <h4>COUTS DE PRODUCTION</h4>
                 <p>Couts matière : {(calculCoutMatiere()).toFixed(2)}€</p>
                 <p>Cout assaisonnement : {(calculCoutAssaisonnement()).toFixed(2)}€</p>
@@ -231,13 +256,13 @@ export default function FicheTechnique() {
                 <p>Prix de vente : {(calculPrixVente(false)).toFixed(2)}€</p>
                 <p>Prix de vente par portion : {(calculPrixVente(true)).toFixed(2)}€</p>
                 <p>Bénéfice par portion : {(calculBeneficeParPortion()).toFixed(2)}€</p>
-                <p>Seuil de rentabilité : charges fixes / ((CA - charges variables) / CA)€</p>
+                <p>Pour que cette recette soit rentable, il faut vendre au moins {portionsVendusPourRentabilité()} portions.</p>
             </div>
         </div>
         <button onClick={() => toPDF()}>Print</button>
         <div>
             <div className='gridrow'>
-                <label className='FormLabel' for="charges">Utilise les paramètres par défaut :</label>
+                <label className='FormLabel' for="charges">Utilise les paramètres de couts par défaut :</label>
                 <input className='FormInput' checked={def} id="charges" type="checkbox" onChange={(event) => setDef(event.target.checked)} />
             </div>
             <div className='gridrow'>
@@ -246,8 +271,15 @@ export default function FicheTechnique() {
             </div>
             <button onClick={() => commitChanges()}>Confirmer</button>
         </div>
+        <div className='gridrow'>
+            <label className='FormLabel' for="checked">Cacher les couts :</label>
+            <input className='FormInput' checked={checked} id="checked" type="checkbox" onChange={(event) => setChecked(event.target.checked)} />
+        </div>
         <button className='FormSubmit' onClick={() => navStep()}>Ajouter une étape à la Fiche Technique</button>
         <button className='FormSubmit' onClick={() => navIngredient()}>Ajouter une un ingrédient à une étape</button>
+        <button className='FormSubmit' onClick={() => navEditStep()}>Modifier une étape</button>
+        <button className='FormSubmit' onClick={() => navEditIngredient()}>Modifier un ingrédient</button>
+        <button className='FormSubmit' onClick={() => navEditFiche()}>Modifier</button>
         <button className='FormSubmitDanger' onClick={() => deleteFiche()}>Supprimer</button></>
         : <Loading></Loading>
     );

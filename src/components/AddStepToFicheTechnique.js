@@ -71,7 +71,8 @@ export default function AddStepToFicheTechnique() {
                         <input className='FormInput' type="number" name="rank" step="1" placeholder="0" onChange={(event) => setRank(event.target.value)} />
                     </div>
                 </div>
-                <button className='FormSubmit' onClick={() => submitHeader()}>Ajouter l'étape à la Fiche Technique</button>
+                <button className='FormSubmit' onClick={() => submitHeader()}>Ajouter</button>
+                <button className='FormSubmit' onClick={() => navDetail()}>Annuler</button>
             </div>
         </div>
         </>

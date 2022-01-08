@@ -76,7 +76,8 @@ export default function AddIngredientToStep() {
                         <input className='FormInput' placeholder="1" id="quantity" type="number" onChange={(event) => setQuantity(event.target.value)} />
                     </div>
                 </div>
-                <button className='FormSubmit' onClick={() => submit()}>Ajouter l'ingrédient à l'étape'</button>
+                <button className='FormSubmit' onClick={() => submit()}>Ajouter'</button>
+                <button className='FormSubmit' onClick={() => navDetail()}>Annuler'</button>
             </div>
         </div>
         </>

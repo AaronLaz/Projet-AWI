@@ -13,6 +13,9 @@ import AddStock from './components/AddStock';
 import AddFicheTechnique from './components/AddFicheTechnique';
 import AddStepToFicheTechnique from './components/AddStepToFicheTechnique';
 import AddIngredientToStep from './components/AddIngredientToStep';
+import EditIngredientInStep from './components/EditIngredientInStep';
+import EditFicheTechnique from './components/EditFicheTechnique';
+import EditStep from './components/EditStep';
 import Costs from './components/Costs';
 import EditCosts from './components/EditCosts';
 import { Label } from './components/Label';
@@ -44,6 +47,9 @@ function App() {
         '/fichetechniques/add', 
         "/fichetechnique/addStep/:id", 
         "/fichetechnique/addIngredient/:id",
+        "/fichetechnique/editStep/:id",
+        "/fichetechnique/edit/:id",
+        "/fichetechnique/editIngredient/:id",
         "/couts",
         "/couts/edit",
         "/labels"]}>
@@ -63,6 +69,9 @@ function App() {
             <Route exact path="/fichetechniques/add" component={AddFicheTechnique}/>
             <Route exact path="/fichetechnique/addStep/:id" component={AddStepToFicheTechnique}/>
             <Route exact path="/fichetechnique/addIngredient/:id" component={AddIngredientToStep}/>
+            <Route exact path="/fichetechnique/editStep/:id" component={EditStep}/>
+            <Route exact path="/fichetechnique/edit/:id" component={EditFicheTechnique}/>
+            <Route exact path="/fichetechnique/editIngredient/:id" component={EditIngredientInStep}/>
             <Route exact path="/couts" component={Costs}/>
             <Route exact path="/couts/edit" component={EditCosts}/>
             <Route exact path="/labels" component={Label}/>

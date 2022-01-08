@@ -29,13 +29,31 @@ export async function getFicheTechnique(id) {
                 },
             };
             axios.get(url, config).then((fichetechnique) => {
-                console.log(fichetechnique.data);
                 resolve(fichetechnique.data);
             });
         } catch (err) {
             reject(err);
         }
     });
+}
+
+export async function getDocIDForStep(stepid){
+    return new Promise((resolve, reject) => {
+        try{
+            const url = `https://awi-backend.herokuapp.com/technicaldoc/get/docid/${stepid}`;
+            const config = {
+                method: 'get',
+                headers: {
+                    'Content-Type': 'application/json' 
+                },
+            };
+            axios.get(url, config).then((result) => {
+                resolve(result.data.docid);
+            });
+        } catch (err) {
+            reject(err);
+        }
+    })
 }
 
 export async function addFicheTechnique(techdoc){
@@ -58,6 +76,7 @@ export async function addFicheTechnique(techdoc){
                     "nbserved": techdoc.nbserved,
                     "default": techdoc.default,
                     "usecharges": techdoc.usecharges,
+                    "assaisonemments": techdoc.assaisonemments,
                 }
             };
             axios(url, config).then((result) => {
@@ -89,6 +108,7 @@ export async function editFicheTechnique(data){
                     "nbserved": data.nbserved,
                     "default": data.default,
                     "usecharges": data.usecharges,
+                    "assaisonemments": data.assaisonemments,
                 }
             };
             axios(url, config).then((result) => {
@@ -169,12 +189,83 @@ export async function addStep(step){
     })
 }
 
+export async function editStep(data){
+    return new Promise((resolve, reject) => {
+        try {
+            const url = `https://awi-backend.herokuapp.com/technicaldoc/put/step`;
+            const config = {
+                method: 'put',
+                headers: {
+                    'Content-Type': 'application/json' 
+                },
+                data: {
+                    "stepid": data.stepid,
+                    "title": data.title,
+                    "description": data.description,
+                    "time": data.time,
+                }
+            };
+            axios(url, config).then((result) => {
+                resolve(result.data);
+            });
+        } catch (err) {
+            reject(err);
+        }
+    })
+}
+
+export async function deleteStepFromFiche(data){
+    return new Promise((resolve, reject) => {
+        try {
+            const url = `https://awi-backend.herokuapp.com/technicaldoc/delete/step`;
+            const config = {
+                method: 'delete',
+                headers: {
+                    'Content-Type': 'application/json' 
+                },
+                data: {
+                    "stepid": data.stepid,
+                }
+            };
+            axios(url, config).then((result) => {
+                resolve(result.data);
+            });
+        } catch (err) {
+            reject(err);
+        }
+    })
+}
+
 export async function addStepToFicheTechnique(data){
     return new Promise((resolve, reject) => {
         try {
             const url = `https://awi-backend.herokuapp.com/technicaldoc/post/stepinheader`;
             const config = {
                 method: 'post',
+                headers: {
+                    'Content-Type': 'application/json' 
+                },
+                data: {
+                    "docid": data.docid,
+                    "stepid": data.stepid,
+                    "rank": data.rank,
+                }
+            };
+            axios(url, config).then((result) => {
+                resolve(result.data);
+            });
+        } catch (err) {
+            reject(err);
+        }
+    })
+}
+
+export async function editStepInFicheTechnique(data){
+    return new Promise((resolve, reject) => {
+        try {
+            const url = `https://awi-backend.herokuapp.com/technicaldoc/put/stepinheader`;
+            const config = {
+                method: 'put',
                 headers: {
                     'Content-Type': 'application/json' 
                 },
@@ -206,6 +297,53 @@ export async function addIngredientToStep(data){
                     "stepid": data.stepid,
                     "ingredientcode": data.ingredientcode,
                     "quantity":data.quantity,
+                }
+            };
+            axios(url, config).then((result) => {
+                resolve(result.data);
+            });
+        } catch (err) {
+            reject(err);
+        }
+    })
+}
+
+export async function editIngredientInStep(data){
+    return new Promise((resolve, reject) => {
+        try {
+            const url = `https://awi-backend.herokuapp.com/technicaldoc/put/ingredientinstep`;
+            const config = {
+                method: 'put',
+                headers: {
+                    'Content-Type': 'application/json' 
+                },
+                data: {
+                    "stepid": data.stepid,
+                    "ingredientcode": data.ingredientcode,
+                    "quantity": data.quantity,
+                }
+            };
+            axios(url, config).then((result) => {
+                resolve(result.data);
+            });
+        } catch (err) {
+            reject(err);
+        }
+    })
+}
+
+export async function deleteIngredientFromStep(data){
+    return new Promise((resolve, reject) => {
+        try {
+            const url = `https://awi-backend.herokuapp.com/technicaldoc/delete/ingredientinstep`;
+            const config = {
+                method: 'delete',
+                headers: {
+                    'Content-Type': 'application/json' 
+                },
+                data: {
+                    "stepid": data.stepid,
+                    "ingredientcode": data.ingredientcode,
                 }
             };
             axios(url, config).then((result) => {

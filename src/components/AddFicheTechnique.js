@@ -13,6 +13,7 @@ export default function AddFicheTechnique() {
     const [responsable, setResponsable] = useState();
     const [nbserved, setNbserved] = useState();
     const [category, setCategory] = useState();
+    const [assaisonemments, setAss] = useState();
     const history = useHistory();
 
     const navDetail = () => {
@@ -31,6 +32,7 @@ export default function AddFicheTechnique() {
             "nbserved":parseInt(nbserved),
             "default":1,
             "usecharges":0,
+            "assaisonemments":assaisonemments
         };
         addFicheTechnique(techdoc).then((result) => {navDetail();});
     }
@@ -83,7 +85,14 @@ export default function AddFicheTechnique() {
                         <input className='FormInput' name="nbserved" type="number" step="1" placeholder="1" onChange={(event) => setNbserved(event.target.value)} />
                     </div>
                 </div>
+                <div className='blockForm'>
+                    <div className='gridrow'>
+                        <label className='FormLabel' for='nbserved'>Couts Assaisonnements</label>
+                        <input className='FormInput' name="nbserved" type="number" step="0.01" placeholder="0" onChange={(event) => setAss(event.target.value)} />
+                    </div>
+                </div>
                 <button className='FormSubmit' onClick={() => {submitHeader();}}>Ajouter l'entête de Fiche Technique</button>
+                <button className='FormSubmit' onClick={() => {navDetail();}}>Annuler</button>
             </div>
         </div>
         </>
