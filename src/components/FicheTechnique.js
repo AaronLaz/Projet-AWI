@@ -71,6 +71,84 @@ export default function FicheTechnique() {
         });
     }
 
+    const calculCoutMatiere = () => {
+        let sum = 0;
+        fichetechnique.steps.forEach((s) => {
+            s.ingredients.forEach((i) => {
+                sum += i.quantity * i.unitprice;
+            });
+        });
+        return sum;
+    }
+
+    const calculCoutChargesFluides = () => {
+        let sum = 0;
+        if(def){
+            if(costs.charges){
+                fichetechnique.steps.forEach((s) => {
+                    sum += (s.time/60) * (costs.fluides);
+                })
+            }
+        }else{
+            if(usecharges){
+                fichetechnique.steps.forEach((s) => {
+                    sum += (s.time/60) * (costs.fluides);
+                })
+            }
+        }
+        return sum;
+    }
+
+    const calculCoutChargesPersonnel = () => {
+        let sum = 0;
+        if(def){
+            if(costs.charges){
+                fichetechnique.steps.forEach((s) => {
+                    sum += (s.time/60) * (costs.personnel);
+                })
+            }
+        }else{
+            if(usecharges){
+                fichetechnique.steps.forEach((s) => {
+                    sum += (s.time/60) * (costs.personnel);
+                })
+            }
+        }
+        return sum;
+    }
+
+    const totalCouts = () => {
+        return calculCoutChargesFluides() + calculCoutChargesPersonnel() + calculCoutMatiere();
+    }
+
+    const calculPrixVente = (byPortion) => {
+        let val = 0;
+        if(def){
+            if(costs.charges){
+                val = totalCouts() * (costs.markup/100)
+            }else{
+                val = totalCouts() * (costs.markupnocharges/100)
+            }
+        }else{
+            if(usecharges){
+                val = totalCouts() * (costs.markup/100)
+            }else{
+                val = totalCouts() * (costs.markupnocharges/100)
+            }
+        }
+        if(byPortion){
+            return val/fichetechnique.nbserved;
+        }else{
+            return val;
+        }
+    }
+
+    const calculBeneficeParPortion = () => {
+        let couts = totalCouts();
+        let vente = calculPrixVente(true);
+        return vente - (couts / fichetechnique.nbserved)
+    }
+
     useEffect(() => {
         getFicheTechnique(id).then((result) => {
             setFicheTechnique(result);
@@ -140,17 +218,24 @@ export default function FicheTechnique() {
             </div>
             <div>
                 <h4>COUTS DE PRODUCTION</h4>
+                <p>Couts matière : {(calculCoutMatiere()).toFixed(2)}€</p>
+                <p>Couts fluides : {(calculCoutChargesFluides()).toFixed(2)}€</p>
+                <p>Couts personnel : {(calculCoutChargesPersonnel()).toFixed(2)}€</p>
                 <h4>PRIX DE VENTE</h4>
+                <p>Prix de vente : {(calculPrixVente(false)).toFixed(2)}€</p>
+                <p>Prix de vente par portion : {(calculPrixVente(true)).toFixed(2)}€</p>
+                <p>Bénéfice par portion : {(calculBeneficeParPortion()).toFixed(2)}€</p>
+                <p>Seuil de rentabilité : charges fixes / ((CA - charges variables) / CA)€</p>
             </div>
         </div>
         <button onClick={() => toPDF()}>Print</button>
         <div>
             <div className='gridrow'>
-                <label className='FormLabel' for="charges">Utiliser charges par défaut?</label>
+                <label className='FormLabel' for="charges">Utilise les paramètres par défaut :</label>
                 <input className='FormInput' checked={def} id="charges" type="checkbox" onChange={(event) => setDef(event.target.checked)} />
             </div>
             <div className='gridrow'>
-                <label className='FormLabel' for="charges">Utiliser charges</label>
+                <label className='FormLabel' for="charges">Utilise charges pour calculer les couts :</label>
                 <input disabled={def} className='FormInput' checked={usecharges} id="charges" type="checkbox" onChange={(event) => setUseCharges(event.target.checked)} />
             </div>
             <button onClick={() => commitChanges()}>Confirmer</button>
