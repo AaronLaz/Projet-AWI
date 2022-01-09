@@ -23,6 +23,11 @@ export default function EditFicheTechnique() {
         const url = `/fichetechnique/${id}`;
         history.push(url);
     }
+
+    const navEditNbServed = () => {
+        const url = `/fichetechnique/editNbServed/${id}`;
+        history.push(url);
+    }
     
     const toInt = (val) => {
         if(val){
@@ -112,7 +117,8 @@ export default function EditFicheTechnique() {
                         <input className='FormInput' name="nbserved" type="number" step="0.01" value={assaisonemments} onChange={(event) => setAss(event.target.value)} />
                     </div>
                 </div>
-                <button className='FormSubmit' onClick={() => {submitHeader();}}>Modifier</button>
+                <button className='FormSubmit' onClick={() => {navEditNbServed();}}>Modifier Nombre Servi</button>
+                <button className='FormSubmit' onClick={() => {submitHeader();}}>Enregistrer</button>
                 <button className='FormSubmit' onClick={() => {navDetail();}}>Annuler</button>
             </div>
         </div>

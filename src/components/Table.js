@@ -9,6 +9,8 @@ export default function Table() {
   const [ingredients, setIngredients] = useState([]);
   const [search, setSearch] = useState('');
   const [results, setResults] = useState([]);
+  const [catSearch, setCatSearch] = useState('');
+  const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(false);
 
   const searchIngredients = () => {
@@ -17,6 +19,12 @@ export default function Table() {
     setResults(result);
   }
 
+  const allCat = {
+    "min":0,
+    "max":100000,
+    "category":"Tous",
+  };
+
   const toBoolean = (bool) => {
     if(bool === 1){
       return "Oui";
@@ -24,11 +32,55 @@ export default function Table() {
       return "Non";
     }
   }
+    
+  const searchByCategory = () => {
+    let cat = catSearch.split('|');
+    const result = ingredients.filter(ingredient => (ingredient.code >= cat[0] && ingredient.code <= cat[1]));
+    setResults(result);
+  }
+
+  const initCategories = () => {
+    let array = [];
+    array.push(allCat);
+    let a = {
+      "min":100,
+      "max":199,
+      "category":"Viandes / Volailles",
+    };
+    array.push(a);
+    a = {
+      "min":200,
+      "max":299,
+      "category":"Poisson et Crustaces",
+    };
+    array.push(a);
+    a = {
+      "min":300,
+      "max":399,
+      "category":"Crèmerie",
+    };
+    array.push(a);
+    a = {
+      "min":400,
+      "max":499,
+      "category":"Fruits et Légumes",
+    };
+    array.push(a);
+    a = {
+      "min":500,
+      "max":1000000,
+      "category":"Epicerie",
+    };
+    array.push(a);
+    setCategories(array);
+  }
 
   useEffect(() => {
     getIngredients().then((result) => {
       setIngredients(result);
       setResults(result);
+      initCategories();
+      setCatSearch(allCat);
     });
     setTimeout(() => setLoading(true),1000);
   }, []);
@@ -42,6 +94,16 @@ export default function Table() {
           <input className="mercurial-search-input" type="text" onChange={(ev) => setSearch(ev.target.value)} placeholder="Recherche par libellé"></input>
           <button className="mercurial-search-button" onClick={() => searchIngredients()}>Rechercher</button>
         </div>
+          <div>
+              <select className="mercurial-search-input" name="steps" id="steps" onChange={(event) => setCatSearch(event.target.value)}>
+                  {categories.map((c) => (
+                            <>
+                            <option key={c.category} value={`${c.min}|${c.max}`}>{c.category}</option>
+                            </>
+                        ))}
+              </select>
+              <button className="mercurial-search-button" onClick={() => searchByCategory()}>Chercher</button> 
+          </div>
         <a className='mercurial-add-link' href='/mercurial/add'><button className="mercurial-add-button">Ajouter</button></a>
       </div>
       <table className="mercurial-table">

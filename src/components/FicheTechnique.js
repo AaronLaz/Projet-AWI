@@ -176,6 +176,9 @@ export default function FicheTechnique() {
         let vente = calculPrixVente(true) / 1.1;
         let mcv = (vente - chargesVar/fichetechnique.nbserved) / vente;
         let result = chargesFix / mcv;
+        if(chargesFix == 0){
+            result = totalCouts() / mcv;
+        }
         return Math.ceil(result);
     }
 
