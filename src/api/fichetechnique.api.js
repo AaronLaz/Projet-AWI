@@ -56,6 +56,25 @@ export async function getDocIDForStep(stepid){
     })
 }
 
+export async function getTickets() {
+    return new Promise((resolve, reject) => {
+        try {
+            const url = `https://awi-backend.herokuapp.com/technicaldoc/tickets`;
+            const config = {
+                method: 'get',
+                headers: { 
+                    'Content-Type': 'application/json' 
+                },
+            };
+            axios.get(url, config).then((fichetechniques) => {
+                resolve(fichetechniques.data);
+            });
+        } catch (err) {
+            reject(err);
+        }
+    });
+}
+
 export async function addFicheTechnique(techdoc){
     return new Promise((resolve, reject) => {
         console.log(techdoc);
