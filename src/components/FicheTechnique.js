@@ -275,12 +275,15 @@ export default function FicheTechnique() {
             <label className='FormLabel' for="checked">Cacher les couts :</label>
             <input className='FormInput' checked={checked} id="checked" type="checkbox" onChange={(event) => setChecked(event.target.checked)} />
         </div>
-        <button className='FormSubmit' onClick={() => navStep()}>Ajouter une étape à la Fiche Technique</button>
-        <button className='FormSubmit' onClick={() => navIngredient()}>Ajouter une un ingrédient à une étape</button>
-        <button className='FormSubmit' onClick={() => navEditStep()}>Modifier une étape</button>
-        <button className='FormSubmit' onClick={() => navEditIngredient()}>Modifier un ingrédient</button>
-        <button className='FormSubmit' onClick={() => navEditFiche()}>Modifier</button>
-        <button className='FormSubmitDanger' onClick={() => deleteFiche()}>Supprimer</button></>
+        <div className="ButtonDiv">
+            <button className='FormSubmit' onClick={() => navStep()}>Ajouter une étape à la Fiche Technique</button>
+            <button className='FormSubmit' onClick={() => navIngredient()}>Ajouter une un ingrédient à une étape</button>
+            <button className='FormSubmit' onClick={() => navEditStep()}>Modifier une étape</button>
+            <button className='FormSubmit' onClick={() => navEditIngredient()}>Modifier un ingrédient</button>
+            <button className='FormSubmit' onClick={() => navEditFiche()}>Modifier</button>
+            <button className='DelButton' onClick={() => deleteFiche()}>Supprimer</button>
+        </div>
+        </>
         : <Loading></Loading>
     );
 }

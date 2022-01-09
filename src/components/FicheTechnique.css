@@ -37,6 +37,6 @@ th, td {
     hyphens: auto;
 }
 
-.FormSubmitDanger {
-    color: red;
+.ButtonDiv{
+    justify-content: space-evenly;
 }

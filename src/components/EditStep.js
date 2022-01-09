@@ -113,9 +113,11 @@ export default function EditStep() {
                         <input className='FormInput' type="number" name="rank" step="1" value={rank} onChange={(event) => setRank(event.target.value)} />
                     </div>
                 </div>
-                <button className='FormSubmit' onClick={() => submitHeader()}>Enregistrer</button>
-                <button className='FormSubmit' onClick={() => navDetail()}>Annuler</button>
-                <button className='FormSubmitDanger' onClick={() => deleteStep()}>Supprimer</button>
+                <div className="ButtonDiv">
+                    <button className='FormSubmit' onClick={() => submitHeader()}>Enregistrer</button>
+                    <button className='FormSubmit' onClick={() => navDetail()}>Annuler</button>
+                    <button className='DelButton' onClick={() => deleteStep()}>Supprimer</button>
+                </div>
             </div>
         </div>
         </>

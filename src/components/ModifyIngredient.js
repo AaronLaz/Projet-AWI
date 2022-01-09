@@ -75,8 +75,10 @@ export default function ModifyIngredient() {
                         <input className='FormInput' name="allergen" type="checkbox" checked={allergen} onChange={(event) => setAllergen(event.target.checked)}/>
                     </div>
                 </div>
-                <button className="DelButton" onClick={() => navDetail()}>Annuler</button>
-                <button className="ModifyButton" onClick={() => update()}>Confirmer</button>
+                <div className="ButtonDiv">
+                    <button className="DelButton" onClick={() => navDetail()}>Annuler</button>
+                    <button className="ModifyButton" onClick={() => update()}>Confirmer</button>
+                </div>
             </div>
         </div></>
     )

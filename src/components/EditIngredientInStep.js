@@ -105,9 +105,11 @@ export default function EditIngredientInStep() {
                         <input className='FormInput' type="number" name="quantity" step="1" value={quantity} onChange={(event) => setQuantity(event.target.value)} />
                     </div>
                 </div>
-                <button className='FormSubmit' onClick={() => submitHeader()}>Enregistrer</button>
-                <button className='FormSubmit' onClick={() => navDetail()}>Annuler</button>
-                <button className='FormSubmitDanger' onClick={() => deleteIngredient()}>Supprimer</button>
+                <div className="ButtonDiv">
+                    <button className='FormSubmit' onClick={() => submitHeader()}>Enregistrer</button>
+                    <button className='FormSubmit' onClick={() => navDetail()}>Annuler</button>
+                    <button className='DelButton' onClick={() => deleteIngredient()}>Supprimer</button>
+                </div>
             </div>
         </div>
         </>
