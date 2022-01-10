@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { getCosts } from '../api/costs.api';
-import './IngredientForm.css';
+import './FicheTechnique.css';
 
 export default function Costs() {
   const [costs, setCosts] = useState([]);
 
   const toBoolean = (value) => {
-    return (value === 1).toString();
+    if(value){
+      return "Oui";
+    }else{
+      return "Non";
+    }
   }
   
   useEffect(() => {
@@ -21,14 +25,29 @@ export default function Costs() {
     <div className='FormContainer'>
       <div className="Form">
         <h3>Cout des charges</h3>
-        <p>Couts des fluides : {costs.fluides}€ / h</p>
-        <p>Couts du personnel : {costs.personnel}€ / h</p>
+        <div className="grid3">
+          <label htmlFor="fluides">Couts des fluides :</label>
+          <input id="fluides" type="text" disabled value={costs.fluides+"€ / h"}/>
+        </div>
+        <div className="grid3">
+          <label htmlFor="personnel">Couts du personnel :</label>
+          <input id="personnel" type="text" disabled value={costs.personnel+"€ / h"}/>
+        </div>
         <h3>Calcul du prix de vente</h3>
-        <p>Taux avec charges : {costs.markup}%</p>
-        <p>Taux sans charges : {costs.markupnocharges}%</p>
+        <div className="grid3">
+          <label htmlFor="tac">Taux avec charges :</label>
+          <input id="tac" type="text" disabled value={costs.markup+"%"}/>
+        </div>
+        <div className="grid3">
+          <label htmlFor="tsc">Taux sans charges :</label>
+          <input id="tsc" type="text" disabled value={costs.markupnocharges+"%"}/>
+        </div>
         <h3>Réglage par défaut</h3>
-        <p>Utiliser les charges pour le calcul des couts ? {toBoolean(costs.charges)}</p>
-        <div className="mercurial-header-div">
+        <div className="grid3">
+          <label htmlFor="b">Utiliser les charges pour le calcul des couts :</label>
+          <input id="b" type="text" disabled value={toBoolean(costs.charges)}/>
+        </div>
+        <div>
           <a href='/couts/edit'><button className='AddButton'>Modifier</button></a>
         </div>
       </div>
