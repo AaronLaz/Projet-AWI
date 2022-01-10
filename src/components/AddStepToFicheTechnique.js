@@ -27,12 +27,13 @@ export default function AddStepToFicheTechnique() {
             "description":description,
             "time":time,
         };
+        addStep(step).then((result) => {
         const join = {
             "docid":id,
             "stepid":stepid,
             "rank":rank,
         };
-        addStep(step).then((result) => {addStepToFicheTechnique(join).then((result) => {navDetail();})});
+        addStepToFicheTechnique(join).then((result) => {navDetail();})});
     }
 
     return (
