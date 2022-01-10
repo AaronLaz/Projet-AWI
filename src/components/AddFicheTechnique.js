@@ -57,7 +57,7 @@ export default function AddFicheTechnique() {
                 </div>
                 <div className='blockForm'>
                     <div className='gridrow'>
-                        <label className='FormLabel' for="header">header</label>
+                        <label className='FormLabel' for="header">Description</label>
                         <input className='FormInput' placeholder="header" id="header" type="text" onChange={(event) => setHeader(event.target.value)} />
                     </div>
                 </div>
