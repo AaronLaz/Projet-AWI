@@ -11,11 +11,18 @@ This project is deployed using heroku at [https://projet-awi.herokuapp.com/](htt
 ### Functionality
 
 * Mercuriale
-  * Num 1
-  * Num 2
-  * Num 3
+  * Recherche par libellé
+  * Recherche par catégorie
+  * Ajouter un ingrédient
+  * Ajouter du stock
+  * Modifier un ingrédient
+  * Voir allergènes
 
 * Fiche Techniques
+ * Recherche par titre
+ * Recherche par catégorie
+ * Ajouter une fiche technique
+ * Ajouter une étape à la fiche technique
 
 * Etiquettes
 
