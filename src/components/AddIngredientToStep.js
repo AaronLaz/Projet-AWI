@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
-import './FicheTechnique.css';
+import './IngredientForm.css';
 import { addIngredientToStep, getFicheTechnique } from '../api/fichetechnique.api';
 import { getIngredients } from '../api/ingredient.api';
 
@@ -77,7 +77,7 @@ export default function AddIngredientToStep() {
                     </div>
                 </div>
                 <button className='FormSubmit' onClick={() => submit()}>Ajouter'</button>
-                <button className='FormSubmit' onClick={() => navDetail()}>Annuler'</button>
+                <button className='DelButton' onClick={() => navDetail()}>Annuler'</button>
             </div>
         </div>
         </>

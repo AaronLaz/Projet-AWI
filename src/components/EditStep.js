@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
-import './FicheTechnique.css';
+import './IngredientForm.css';
 import { editStep, getFicheTechnique, editStepInFicheTechnique, deleteStepFromFiche } from '../api/fichetechnique.api';
 
 export default function EditStep() {
@@ -114,7 +114,7 @@ export default function EditStep() {
                     </div>
                 </div>
                 <div className="ButtonDiv">
-                    <button className='FormSubmit' onClick={() => submitHeader()}>Enregistrer</button>
+                    <button className='AddButton' onClick={() => submitHeader()}>Enregistrer</button>
                     <button className='FormSubmit' onClick={() => navDetail()}>Annuler</button>
                     <button className='DelButton' onClick={() => deleteStep()}>Supprimer</button>
                 </div>

@@ -1,4 +1,5 @@
 import axios from 'axios';
+
 export async function getFicheTechniques() {
     return new Promise((resolve, reject) => {
         try {
@@ -279,6 +280,7 @@ export async function addStepToFicheTechnique(data){
     })
 }
 
+// function pulls an ID that hasn't been taken from the database of steps
 export async function freeStepID(){
     return new Promise((resolve, reject) => {
         try {

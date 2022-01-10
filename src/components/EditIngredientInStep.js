@@ -106,7 +106,7 @@ export default function EditIngredientInStep() {
                     </div>
                 </div>
                 <div className="ButtonDiv">
-                    <button className='FormSubmit' onClick={() => submitHeader()}>Enregistrer</button>
+                    <button className='AddButton' onClick={() => submitHeader()}>Enregistrer</button>
                     <button className='FormSubmit' onClick={() => navDetail()}>Annuler</button>
                     <button className='DelButton' onClick={() => deleteIngredient()}>Supprimer</button>
                 </div>

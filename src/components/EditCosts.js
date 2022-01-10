@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 import { getCosts, setCosts } from '../api/costs.api';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
-import './FicheTechnique.css';
+import './IngredientForm.css';
 
 export default function EditCosts() {
   const [fluides, setFluides] = useState([]);
@@ -79,11 +79,11 @@ export default function EditCosts() {
                         <input className='FormInput' checked={charges} id="charges" type="checkbox" onChange={(event) => setCharges(event.target.checked)} />
                     </div>
                 </div>
+                <div>
+                    <button className="FormSubmit" onClick={() => submit()}>Confirmer</button>
+                    <a className='DelButton' href='/couts'><button className="DelButton">Annuler</button></a>
+                </div>
             </div>
-        </div>
-        <div className="mercurial-header-div">
-            <button className="mercurial-add-button" onClick={() => submit()}>Confirmer</button>
-            <a className='mercurial-add-link' href='/couts'><button className="mercurial-add-button">Annuler</button></a>
         </div>
     </div></>
   );

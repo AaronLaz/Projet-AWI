@@ -23,6 +23,11 @@ export const IngredientForm = () => {
         history.push(url);
     }
 
+    const navList = () => {
+        const url = `/mercurial`;
+        history.push(url);
+    }
+
     return (
         <>
         <Helmet>Ajouter Ingredient</Helmet>
@@ -66,6 +71,7 @@ export const IngredientForm = () => {
                     </div>
                 </div>
                 <button className='FormSubmit' onClick={() => submit()}>Ajouter</button>
+                <button className='DelButton' onClick={() => navList()}>Annuler</button>
             </div>
         </div></>
     )

@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import { Loading } from './loading';
-import './FicheTechnique.css';
+import './IngredientForm.css';
 import { getFicheTechnique, editFicheTechnique, editIngredientInStep } from '../api/fichetechnique.api';
 
 export default function EditFicheTechniqueNbServed() {
@@ -80,7 +80,7 @@ export default function EditFicheTechniqueNbServed() {
                     </div>
                 </div>
                 <button className='FormSubmit' onClick={() => {submitHeader();}}>Enregistrer</button>
-                <button className='FormSubmit' onClick={() => {navDetail();}}>Annuler</button>
+                <button className='DelButton' onClick={() => {navDetail();}}>Annuler</button>
             </div>
         </div>
         </>

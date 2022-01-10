@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
-import './FicheTechnique.css';
+import './IngredientForm.css';
 import { addFicheTechnique } from '../api/fichetechnique.api';
 
 export default function AddFicheTechnique() {
@@ -18,6 +18,11 @@ export default function AddFicheTechnique() {
 
     const navDetail = () => {
         const url = `/fichetechnique/${id}`;
+        history.push(url);
+    }
+
+    const navList = () => {
+        const url = `/fichetechniques`;
         history.push(url);
     }
 
@@ -91,8 +96,8 @@ export default function AddFicheTechnique() {
                         <input className='FormInput' name="nbserved" type="number" step="0.01" placeholder="0" onChange={(event) => setAss(event.target.value)} />
                     </div>
                 </div>
-                <button className='FormSubmit' onClick={() => {submitHeader();}}>Ajouter l'entête de Fiche Technique</button>
-                <button className='FormSubmit' onClick={() => {navDetail();}}>Annuler</button>
+                <button className='FormSubmit' onClick={() => {submitHeader();}}>Ajouter</button>
+                <button className='DelButton' onClick={() => {navList();}}>Annuler</button>
             </div>
         </div>
         </>
