@@ -8,6 +8,19 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 This project is deployed using heroku at [https://projet-awi.herokuapp.com/](https://projet-awi.herokuapp.com/).
 
+### Functionality
+
+* Mercuriale
+* Num 1
+* Num 2
+* Num 3
+
+* Fiche Techniques
+
+* Etiquettes
+
+* Couts
+
 ## Source Files
 
 In the project directory, you can run:
