@@ -46,8 +46,8 @@ export default function AddIngredientToStep() {
         <>
         <Helmet>Ajouter Une Etape la Fiche Technique</Helmet>
         <div className='FormContainer'>
-            <div className='Form'>
-                <h3>Ajouter Un Ingrédient à l'étape</h3>
+            <div className='IForm'>
+                <h3>Ajouter Un Ingrédient à une étape</h3>
                 <div>
                     <label for="steps">Selectionnez l'étape : </label>
                     <select name="steps" id="steps" onChange={(event) => setStepId(event.target.value)}>
@@ -76,8 +76,8 @@ export default function AddIngredientToStep() {
                         <input className='FormInput' placeholder="1" id="quantity" type="number" onChange={(event) => setQuantity(event.target.value)} />
                     </div>
                 </div>
-                <button className='FormSubmit' onClick={() => submit()}>Ajouter'</button>
-                <button className='DelButton' onClick={() => navDetail()}>Annuler'</button>
+                <button className='FormSubmit' onClick={() => submit()}>Ajouter</button>
+                <button className='DelButton' onClick={() => navDetail()}>Annuler</button>
             </div>
         </div>
         </>

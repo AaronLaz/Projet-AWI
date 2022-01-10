@@ -17,6 +17,16 @@
     box-shadow: 8px 5px 5px #80ccff;
 }
 
+.IForm {
+    margin:auto;
+    background-color: #e6f5ff;
+    position: relative;
+    width: 700px;
+    justify-content: center;
+    padding: 20px;
+    box-shadow: 8px 5px 5px #80ccff;
+}
+
 .blockForm {
     padding-top: 20px;
 }
