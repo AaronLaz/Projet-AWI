@@ -68,33 +68,38 @@ export default function EditionEtiquette(props) {
     return (
         loading ? <>
             <Helmet>Edition étiquette</Helmet>
-            <div>
+            <div className="containerLabel">
                 <h3>Edition de l'étiquette</h3>
-                <div>
-                    <input type="checkbox" name="vente" onChange={(event) => setVente(event.target.checked)}/>
-                    <label for="vente">Vente</label>
+                <div className="checkbox">
+                    <div>
+                        <input className="demo5" type="checkbox" id="vente" name="vente" onChange={(event) => setVente(event.target.checked)}/>
+                        <label htmlFor="vente"></label>
+                    </div>
+                    <label className="checkbox-label">Vente</label>
                 </div>
-
-                <div>
-                    <input type="checkbox" name="emporter" onChange={(event) => setEmporter(event.target.checked)}/>
-                    <label for="emporter">A Emporter</label>
+                <div className="checkbox">
+                    <div>
+                        <input className="demo5" type="checkbox" id="emporter" name="emporter" onChange={(event) => setEmporter(event.target.checked)}/>
+                        <label htmlFor="emporter"></label>
+                    </div>
+                    <label className="checkbox-label">A Emporter</label>
                 </div>
-                <div ref={referencePDF}>
-                    <table className="mercurial-table">
-                        <thead className="mercurial-thead">
+                <div className="label" ref={referencePDF}>
+                    <table className="label-table">
+                        <thead className="label-thead">
                             <tr>
-                                <th className="mercurial-thead-th">INTITULE</th>
-                                <th className="mercurial-thead-th">QUANTITE</th>
-                                { emporter ? <th className="mercurial-thead-th">INGREDIENTS</th> : null}
+                                <th className="label-thead-th">INTITULE</th>
+                                <th className="label-thead-th">QUANTITE</th>
+                                { emporter ? <th className="label-thead-th">INGREDIENTS</th> : null}
                             </tr>
                         </thead>
                         <tbody>
                             {listeFiche.map((f) => (
                                 <tr key={f.fiche.id}>
-                                    <td className="mercurial-tbody-th">{f.fiche.name}</td>
-                                    <td className="mercurial-tbody-th">{f.quantite}</td>
+                                    <td className="label-tbody-th">{f.fiche.name}</td>
+                                    <td className="label-tbody-th2">{f.quantite}</td>
                                     { emporter ? 
-                                    <td className="mercurial-tbody-th"><ul>{f.fiche.ingredients.map((i) => <li>{i.allergene ? <b>{i.libelle}</b> : i.libelle}</li>)}</ul></td>
+                                    <td className="label-tbody-th"><ul>{f.fiche.ingredients.map((i) => <li>{i.allergene ? <b>{i.libelle}</b> : i.libelle}</li>)}</ul></td>
                                     : null
                                     }
                                 </tr>
@@ -102,8 +107,8 @@ export default function EditionEtiquette(props) {
                         </tbody>
                     </table>
                 </div>
+                <button className="AddButton" onClick={() => modifierStock()}>Print</button>
             </div>
-            <button onClick={() => modifierStock()}>Print</button>
         </> : <Loading></Loading>
     )
 }

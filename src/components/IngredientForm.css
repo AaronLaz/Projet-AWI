@@ -71,7 +71,7 @@
 }
 
 .DelButton {
-    margin: auto;
+    margin: 5px;
     margin-top: 20px;
     position: relative;
     border: none;
@@ -82,6 +82,20 @@
 }
 
 .DelButton:hover{
+    background-color:#ff1a1a;
+}
+
+.DelButton2 {
+    margin: auto;
+    position: relative;
+    border: none;
+    color:black;
+    padding: auto;
+    box-shadow: 3px 3px 3px #ff3333;
+    background-color: #ff6666;
+}
+
+.DelButton2:hover{
     background-color:#ff1a1a;
 }
 
@@ -103,9 +117,8 @@
 
 
 .AddButton {
-    margin: auto;
+    margin: 5px;
     margin-top: 20px;
-    margin-left: 20px;
     position: relative;
     border: none;
     color:black;
@@ -115,5 +128,19 @@
 }
 
 .AddButton:hover {
+    background-color: #33ffad;
+}
+
+.AddButton2 {
+    margin: auto;
+    position: relative;
+    border: none;
+    color:black;
+    padding: auto;
+    box-shadow: 3px 3px 3px #33ffad;
+    background-color: #66ffc2;
+}
+
+.AddButton2:hover {
     background-color: #33ffad;
 }

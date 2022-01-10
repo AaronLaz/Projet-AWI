@@ -1,7 +1,52 @@
-
 .container {
     background-color: gainsboro;
     border: 3px solid;
+    margin-bottom: 20px;
+}
+
+.containerLabel {
+    position: relative;
+    width: 80%;
+    background-color: gainsboro;
+    padding: 40px;
+    margin:auto;
+    border: 1px solid;
+    border-radius: 10px;
+}
+
+.labelTitle {
+    margin-top: 20px;
+}
+
+.searchForLabel {
+    margin-bottom: 20px;
+}
+
+.label-table{
+    width: 90%;
+    border:3px solid;
+    margin:auto;
+}
+
+.label-thead{
+    background-color: #b3e0ff;
+}
+
+.label-thead-th{
+    border:1px solid;
+    text-align: center;
+    padding:5px 10px 5px 10px;
+}
+
+.label-tbody-th{
+    border:1px solid;
+    padding:5px 10px 5px 10px;
+}
+
+.label-tbody-th2{
+    text-align: center;
+    border:1px solid;
+    padding:5px 10px 5px 10px;
 }
 
 .grid1 {
@@ -18,6 +63,13 @@
     grid-template-columns: repeat(2, 1fr);
     grid-auto-rows: minmax(100px, auto);
     border: 1px solid;
+}
+
+.grid3 {
+    margin-bottom: 10px;
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(2, 1fr);
 }
 
 .title, .centered {
@@ -39,4 +91,80 @@ th, td {
 
 .ButtonDiv{
     justify-content: space-evenly;
+}
+
+.ButtonDiv2{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    justify-content: space-evenly;
+    margin-bottom: 20px;
+}
+
+
+/*checkbox*/
+
+.checkbox {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+}
+
+.checkbox-label {
+    margin-left: 10px;
+    vertical-align:text-top;
+}
+
+input[type="checkbox"].demo5 {
+    display: none;
+}
+
+input[type="checkbox"].demo5 + label {
+    box-sizing: border-box;
+    display: inline-block;
+    width: 3rem;
+    height: 1.5rem;
+    border-radius: 1.5rem;
+    padding:2px;
+    background-color: #c0ceda ;
+    transition: all 0.5s ;
+
+}
+
+input[type="checkbox"].demo5 + label::before {
+    box-sizing: border-box;
+    display: block;
+    content: "";
+    height: calc(1.5rem - 4px);
+    width: calc(1.5rem - 4px);
+    border-radius: 50%;
+    background-color: #fff;
+    transition: all 0.5s ;
+}
+
+input[type="checkbox"].demo5:checked + label {
+    background-color: #00B7E8 ;
+}
+
+input[type="checkbox"].demo5:checked + label::before {
+    margin-left: 1.5rem ;
+}
+
+@media print {
+
+    .label-thead{
+        background-color: #b3e0ff;
+    }
+    
+    .label-thead-th{
+        font-size: 35px;
+    }
+    
+    .label-tbody-th, .label-tbody-th2 {
+        font-size: 25px;
+    }
+    
+
+    @page {
+        margin: auto;
+    }
 }

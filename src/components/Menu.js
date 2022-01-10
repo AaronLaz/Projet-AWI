@@ -18,6 +18,7 @@ export default class Menu extends Component {
                             <ul className="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                                 {/* Add icons to the links using the .nav-icon class
          with font-awesome or any other icon font library */}
+                                <li className="nav-header">Outils</li>
                                 <li className="nav-item">
                                     <a href="/mercurial" className="nav-link">
                                         <i className="nav-icon fas fa-th" />
@@ -42,6 +43,7 @@ export default class Menu extends Component {
                                         </p>
                                     </a>
                                 </li>
+                                <li className="nav-header">Ventes</li>
                                 <li className="nav-item">
                                     <a href="/labels" className="nav-link">
                                         <i className="nav-icon fas fa-copy" />
@@ -50,7 +52,7 @@ export default class Menu extends Component {
                                         </p>
                                     </a>
                                 </li>
-                                <li className="nav-header">Finances</li>
+                                <li className="nav-header">Paramètres</li>
                                 <li className="nav-item">
                                     <a href="/couts" className="nav-link">
                                         <i className="nav-icon fas fa-chart-pie" />

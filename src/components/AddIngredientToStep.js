@@ -21,7 +21,7 @@ export default function AddIngredientToStep() {
     }
 
     const submit = () => {
-        if(stepid == undefined || ingredientcode == undefined || quantity == ""){
+        if(stepid === undefined || ingredientcode === undefined || quantity === ""){
             window.alert("Attention! Il faut obligatoirement séléctionner une étape, un ingrédient et une quantité.")
         }else{
             const join = {
@@ -40,41 +40,36 @@ export default function AddIngredientToStep() {
         getFicheTechnique(id).then((result) => {
             setSteps(result.steps);
         })
+        // eslint-disable-next-line react-hooks/exhaustive-deps
       }, []);
 
     return (
         <>
-        <Helmet>Ajouter Une Etape la Fiche Technique</Helmet>
+        <Helmet>Ajouter un ingrédient à une étape</Helmet>
         <div className='FormContainer'>
             <div className='IForm'>
-                <h3>Ajouter Un Ingrédient à une étape</h3>
-                <div>
-                    <label for="steps">Selectionnez l'étape : </label>
+                <h3>Ajouter un ingrédient à une étape</h3>
+                <div className='grid3'>
+                    <label className='FormLabel' for="steps">Selectionnez l'étape :</label>
                     <select name="steps" id="steps" onChange={(event) => setStepId(event.target.value)}>
                         <option>Aucun</option>
                         {steps.map((s) => (
-                            <>
                             <option key={s.stepid} value={s.stepid}>{s.title}</option>
-                            </>
                         ))}
                     </select>
                 </div>
-                <div>
-                    <label for="ingredients">Selectionnez l'ingrédient : </label>
+                <div className='grid3'>
+                    <label className='FormLabel' for="ingredients">Selectionnez l'ingrédient :</label>
                     <select name="ingredients" id="ingredients" onChange={(event) => setCode(event.target.value)}>
                         <option>Aucun</option>
                         {ingredients.map((i) => (
-                            <>
                             <option key={i.code} value={i.code}>{i.code.toString()+" - "+i.libelle}</option>
-                            </>
                         ))}
                     </select>
                 </div>
-                <div>
-                    <div className='gridrow'>
-                        <label className='FormLabel' for="quantity">Quantité</label>
-                        <input className='FormInput' placeholder="1" id="quantity" type="number" onChange={(event) => setQuantity(event.target.value)} />
-                    </div>
+                <div className='grid3'>
+                    <label className='FormLabel' for="quantity">Quantité :</label>
+                    <input className='FormInput' placeholder="1" id="quantity" type="number" onChange={(event) => setQuantity(event.target.value)} />
                 </div>
                 <button className='FormSubmit' onClick={() => submit()}>Ajouter</button>
                 <button className='DelButton' onClick={() => navDetail()}>Annuler</button>
@@ -83,4 +78,3 @@ export default function AddIngredientToStep() {
         </>
     )
 }
-

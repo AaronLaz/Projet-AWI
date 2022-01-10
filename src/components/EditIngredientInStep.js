@@ -20,7 +20,7 @@ export default function EditIngredientInStep() {
     }
 
     const submitHeader = () => {
-        if(step == undefined || ingredient == undefined){
+        if(step === undefined || ingredient === undefined){
             window.alert("Attention! Il faut obligatoirement séléctionner une étape et un ingrédient.")
         }else{
             const s = {
@@ -34,7 +34,7 @@ export default function EditIngredientInStep() {
 
     const setToStep = (sid) => {
         steps.forEach((s) => {
-            if(s.stepid == sid){
+            if(s.stepid === sid){
                 setIngredients(s.ingredients);
                 setStep(s);
             }
@@ -43,7 +43,7 @@ export default function EditIngredientInStep() {
 
     const setToIngredient = (c) => {
         ingredients.forEach((i) => {
-            if(i.code = c){
+            if(i.code === c){
                 setIngredient(i);
                 setQuantity(i.quantity);
             }
@@ -51,7 +51,7 @@ export default function EditIngredientInStep() {
     }
 
     const deleteIngredient = () => {
-        if(step == undefined || ingredient == undefined){
+        if(step === undefined || ingredient === undefined){
             window.alert("Attention! Il faut obligatoirement séléctionner une étape et un ingrédient.")
         }else{
             const data = {
@@ -73,12 +73,12 @@ export default function EditIngredientInStep() {
 
     return (
         <>
-        <Helmet>Ajouter Une Etape la Fiche Technique</Helmet>
+        <Helmet>Modifier un ingrédient dans une étape</Helmet>
         <div className='FormContainer'>
             <div className='Form'>
-                <h3>Ajouter Une Etape la Fiche Technique</h3>
-                <div>
-                    <label for="steps">Selectionnez l'étape : </label>
+                <h3>Modifier un ingrédient dans une étape de la Fiche Technique</h3>
+                <div className='grid3'>
+                    <label className='FormLabel' for="steps">Selectionnez l'étape :</label>
                     <select name="steps" id="steps" onChange={(event) => setToStep(event.target.value)}>
                         <option>Aucun</option>
                         {steps.map((s) => (
@@ -88,8 +88,8 @@ export default function EditIngredientInStep() {
                         ))}
                     </select>
                 </div>
-                <div>
-                    <label for="steps">Selectionnez l'ingrédient : </label>
+                <div className='grid3'>
+                    <label className='FormLabel' for="steps">Selectionnez l'ingrédient :</label>
                     <select name="ingredient" id="ingredient" onChange={(event) => setToIngredient(event.target.value)}>
                         <option>Aucun</option>
                         {ingredients.map((s) => (
@@ -99,11 +99,9 @@ export default function EditIngredientInStep() {
                         ))}
                     </select>
                 </div>
-                <div className='blockForm'>
-                    <div className='gridrow'>
-                        <label className='FormLabel' for="quantity">Quantité</label>
-                        <input className='FormInput' type="number" name="quantity" step="1" value={quantity} onChange={(event) => setQuantity(event.target.value)} />
-                    </div>
+                <div className='grid3'>
+                    <label className='FormLabel' for="quantity">Quantité :</label>
+                    <input className='FormInput' type="number" name="quantity" step="1" value={quantity} onChange={(event) => setQuantity(event.target.value)} />
                 </div>
                 <div className="ButtonDiv">
                     <button className='AddButton' onClick={() => submitHeader()}>Enregistrer</button>

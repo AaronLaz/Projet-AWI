@@ -58,13 +58,11 @@ export const Label = () => {
       <>
       <Helmet>Imprimer une étiquette</Helmet>
       { step ?
-      <div>
-            <h3>Liste de fiche techniques</h3>
-            <div className="mercurial-header-div">
-                <div>
-                   <input className="mercurial-search-input" type="text" onChange={(ev) => setSearch(ev.target.value)} placeholder="Recherche par libellé"></input>
-                    <button className="mercurial-search-button" onClick={() => searchFichesTechniques()}>Search</button> 
-                </div>
+      <div className="containerLabel">
+            <h3>Liste des fiches techniques</h3>
+            <div className="searchForLabel">
+                <input className="mercurial-search-input" type="text" onChange={(ev) => setSearch(ev.target.value)} placeholder="Recherche par libellé"></input>
+                <button className="mercurial-search-button" onClick={() => searchFichesTechniques()}>Search</button> 
                 <button className="mercurial-search-button" onClick={() => resetRecettes()}>Reinitialiser</button>
             </div>
             <table className="mercurial-table">
@@ -78,12 +76,12 @@ export const Label = () => {
                 {results.map((f) => (
                     <tr key={f.id}>
                         <td className="mercurial-tbody-th">{f.name}</td>
-                        <td><button className="mercurial-thead-th" onClick={() => ajouterRecette(f)}>Ajouter</button></td>
+                        <td className="mercurial-thead-th"><button className='AddButton2' onClick={() => ajouterRecette(f)}>Ajouter</button></td>
                     </tr>
                 ))}
                 </tbody>
             </table>
-            <h3>Liste étiquette</h3>
+            <h3 className="labelTitle">Contenu de l'étiquette</h3>
             <table className="mercurial-table">
                 <thead className="mercurial-thead">
                 <tr>
@@ -97,13 +95,13 @@ export const Label = () => {
                     <tr key={i.fiche.id}>
                         <td className="mercurial-tbody-th">{i.fiche.name}</td>
                         <td className="mercurial-tbody-th">{i.quantite}</td>
-                        <td><button className="mercurial-thead-th" onClick={() => supprimerRecette(i.fiche)}>Retirer 1</button></td>
+                        <td className="mercurial-thead-th"><button className="DelButton2" onClick={() => supprimerRecette(i.fiche)}>Retirer 1</button></td>
                     </tr>
                 ))}
                 </tbody>
             </table>
             {ListeRecettes.length !== 0 ?
-                <button className="mercurial-thead-th" onClick={() => setStep(false)}>Edition de l'étiquette</button> : null
+                <button className="ModifyButton" onClick={() => setStep(false)}>Edition de l'étiquette</button> : null
             }
         </div> : <EditionEtiquette liste={ListeRecettes}/>
         } 

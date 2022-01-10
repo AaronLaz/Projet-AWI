@@ -71,11 +71,11 @@ export default function EditFicheTechniqueNbServed() {
         <Helmet>Modifier la Fiche Technique</Helmet>
         <div className='FormContainer'>
             <div className='Form'>
-                <h3>Modifier Nomre Servi dans Fiche Technique</h3>
+                <h3>Modifier Nombre de couverts dans Fiche Technique</h3>
                 <p>Cette modification impacte les quantités des ingrédients dans la fiche technique.</p>
                 <div className='blockForm'>
                     <div className='gridrow'>
-                        <label className='FormLabel' for='nbserved'>Nombre Servi</label>
+                        <label className='FormLabel' for='nbserved'>Nombre de couverts</label>
                         <input className='FormInput' name="nbserved" type="number" step="1" value={nbserved} onChange={(event) => setNbserved(event.target.value)} />
                     </div>
                 </div>

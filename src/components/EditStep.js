@@ -22,7 +22,7 @@ export default function EditStep() {
     }
 
     const submitHeader = () => {
-        if(stepid == undefined){
+        if(stepid === undefined){
             window.alert("Attention! Il faut obligatoirement séléctionner une étape.")
         }else{
             const step = {
@@ -43,7 +43,7 @@ export default function EditStep() {
     }
 
     const deleteStep = () => {
-        if(stepid == undefined){
+        if(stepid === undefined){
             window.alert("Attention! Il faut obligatoirement séléctionner une étape.")
         }else{
             const data = {
@@ -56,7 +56,7 @@ export default function EditStep() {
     const setToStep = (sid) => {
         setStepId(sid);
         steps.forEach((s) => {
-            if(s.stepid == sid){
+            if(s.stepid === sid){
                 setTitle(s.title);
                 setDescription(s.description);
                 setTime(s.time);
@@ -74,52 +74,54 @@ export default function EditStep() {
 
     return (
         <>
-        <Helmet>Ajouter Une Etape la Fiche Technique</Helmet>
-        <div className='FormContainer'>
-            <div className='Form'>
-                <h3>Ajouter Une Etape la Fiche Technique</h3>
-                <div>
-                    <label for="steps">Selectionnez l'étape : </label>
-                    <select name="steps" id="steps" onChange={(event) => setToStep(event.target.value)}>
-                        <option>Aucun</option>
-                        {steps.map((s) => (
-                            <>
-                            <option key={s.stepid} value={s.stepid}>{s.title}</option>
-                            </>
-                        ))}
-                    </select>
-                </div>
-                <div className='blockForm'>
-                    <div className='gridrow'>
-                        <label className='FormLabel' for="title">Titre</label>
-                        <input className='FormInput' value={title} id="title" type="text" onChange={(event) => setTitle(event.target.value)} />
+            <Helmet>Modifier une étape de la fiche technique</Helmet>
+            <div className='FormContainer'>
+                <div className='Form'>
+                    <h3>Modifier une étape de la Fiche Technique</h3>
+                    <div className='blockForm'>
+                        <div className='gridrow'>
+                            <label className='FormLabel' for="steps">Selectionnez l'étape : </label>
+                            <select name="steps" id="steps" onChange={(event) => setToStep(event.target.value)}>
+                                <option>Aucun</option>
+                                {steps.map((s) => (
+                                    <>
+                                    <option key={s.stepid} value={s.stepid}>{s.title}</option>
+                                    </>
+                                ))}
+                            </select>
+                        </div>
                     </div>
-                </div>
-                <div className='blockForm'>
-                    <div className='gridrow'>
-                        <label className='FormLabel' for="description">Description</label>
-                        <input className='FormInput' value={description} id="description" type="text" onChange={(event) => setDescription(event.target.value)} />
+                    <div className='blockForm'>
+                        <div className='gridrow'>
+                            <label className='FormLabel' for="title">Titre :</label>
+                            <input className='FormInput' value={title} id="title" type="text" onChange={(event) => setTitle(event.target.value)} />
+                        </div>
                     </div>
-                </div>
-                <div className='blockForm'>
-                    <div className='gridrow'>
-                        <label className='FormLabel' for="time">Temps</label>
-                        <input className='FormInput' type="number" name="time" step="1" value={time} onChange={(event) => setTime(event.target.value)} />
+                    <div className='blockForm'>
+                        <div className='gridrow'>
+                            <label className='FormLabel' for="description">Description :</label>
+                            <input className='FormInput' value={description} id="description" type="text" onChange={(event) => setDescription(event.target.value)} />
+                        </div>
                     </div>
-                </div>
-                <div className='blockForm'>
-                    <div className='gridrow'>
-                        <label className='FormLabel' for="rank">Phase</label>
-                        <input className='FormInput' type="number" name="rank" step="1" value={rank} onChange={(event) => setRank(event.target.value)} />
+                    <div className='blockForm'>
+                        <div className='gridrow'>
+                            <label className='FormLabel' for="time">Temps :</label>
+                            <input className='FormInput' type="number" name="time" step="1" value={time} onChange={(event) => setTime(event.target.value)} />
+                        </div>
                     </div>
-                </div>
-                <div className="ButtonDiv">
-                    <button className='AddButton' onClick={() => submitHeader()}>Enregistrer</button>
-                    <button className='FormSubmit' onClick={() => navDetail()}>Annuler</button>
-                    <button className='DelButton' onClick={() => deleteStep()}>Supprimer</button>
+                    <div className='blockForm'>
+                        <div className='gridrow'>
+                            <label className='FormLabel' for="rank">Phase :</label>
+                            <input className='FormInput' type="number" name="rank" step="1" value={rank} onChange={(event) => setRank(event.target.value)} />
+                        </div>
+                    </div>
+                    <div className="ButtonDiv">
+                        <button className='AddButton' onClick={() => submitHeader()}>Enregistrer</button>
+                        <button className='FormSubmit' onClick={() => navDetail()}>Annuler</button>
+                        <button className='DelButton' onClick={() => deleteStep()}>Supprimer</button>
+                    </div>
                 </div>
             </div>
-        </div>
         </>
     )
 }

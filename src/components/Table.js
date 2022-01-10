@@ -84,6 +84,7 @@ export default function Table() {
       setCatSearch(allCat);
     });
     setTimeout(() => setLoading(true),1000);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -98,9 +99,7 @@ export default function Table() {
           <div>
               <select className="mercurial-search-input" name="steps" id="steps" onChange={(event) => setCatSearch(event.target.value)}>
                   {categories.map((c) => (
-                            <>
                             <option key={c.category} value={`${c.min}|${c.max}`}>{c.category}</option>
-                            </>
                         ))}
               </select>
               <button className="mercurial-search-button" onClick={() => searchByCategory()}>Chercher</button> 

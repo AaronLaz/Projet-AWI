@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import './FicheTechnique.css';
-import { useReactToPrint } from 'react-to-print'; 
+import { useReactToPrint } from 'react-to-print';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import { getFicheTechnique, editFicheTechnique, deleteFicheTechnique, deleteFicheTechniqueStep } from '../api/fichetechnique.api';
 import { getCosts } from '../api/costs.api';
@@ -10,7 +10,7 @@ import { Loading } from './loading';
 export default function FicheTechnique() {
     const [costs, setCosts] = useState();
     const [fichetechnique, setFicheTechnique] = useState();
-    const [def,setDef] = useState([]);
+    const [def, setDef] = useState([]);
     const [usecharges, setUseCharges] = useState([]);
     const history = useHistory();
     const [loading, setLoading] = useState(false);
@@ -48,24 +48,24 @@ export default function FicheTechnique() {
 
     // function converts booleans to integers
     const toInt = (val) => {
-        if(val){
+        if (val) {
             return 1;
-        }else{
+        } else {
             return 0;
         }
     }
     const commitChanges = () => {
         const data = {
-            "id":id.toString(),
-            "name":fichetechnique.name,
-            "header":fichetechnique.header,
-            "author":fichetechnique.author,
-            "responsable":fichetechnique.responsable,
-            "category":fichetechnique.category,
-            "nbserved":fichetechnique.nbserved,
-            "default":toInt(def),
-            "usecharges":toInt(usecharges),
-            "assaisonemments":fichetechnique.assaisonemments,
+            "id": id.toString(),
+            "name": fichetechnique.name,
+            "header": fichetechnique.header,
+            "author": fichetechnique.author,
+            "responsable": fichetechnique.responsable,
+            "category": fichetechnique.category,
+            "nbserved": fichetechnique.nbserved,
+            "default": toInt(def),
+            "usecharges": toInt(usecharges),
+            "assaisonemments": fichetechnique.assaisonemments,
         }
         editFicheTechnique(data);
     }
@@ -99,16 +99,16 @@ export default function FicheTechnique() {
 
     const calculCoutChargesFluides = () => {
         let sum = 0;
-        if(def){
-            if(costs.charges){
+        if (def) {
+            if (costs.charges) {
                 fichetechnique.steps.forEach((s) => {
-                    sum += (s.time/60) * (costs.fluides);
+                    sum += (s.time / 60) * (costs.fluides);
                 })
             }
-        }else{
-            if(usecharges){
+        } else {
+            if (usecharges) {
                 fichetechnique.steps.forEach((s) => {
-                    sum += (s.time/60) * (costs.fluides);
+                    sum += (s.time / 60) * (costs.fluides);
                 })
             }
         }
@@ -117,16 +117,16 @@ export default function FicheTechnique() {
 
     const calculCoutChargesPersonnel = () => {
         let sum = 0;
-        if(def){
-            if(costs.charges){
+        if (def) {
+            if (costs.charges) {
                 fichetechnique.steps.forEach((s) => {
-                    sum += (s.time/60) * (costs.personnel);
+                    sum += (s.time / 60) * (costs.personnel);
                 })
             }
-        }else{
-            if(usecharges){
+        } else {
+            if (usecharges) {
                 fichetechnique.steps.forEach((s) => {
-                    sum += (s.time/60) * (costs.personnel);
+                    sum += (s.time / 60) * (costs.personnel);
                 })
             }
         }
@@ -134,9 +134,9 @@ export default function FicheTechnique() {
     }
 
     const calculCoutAssaisonnement = () => {
-        if(fichetechnique.assaisonemments <= 0){
+        if (fichetechnique.assaisonemments <= 0) {
             return calculCoutMatiere() * 0.05;
-        }else{
+        } else {
             return fichetechnique.assaisonemments;
         }
     }
@@ -148,22 +148,22 @@ export default function FicheTechnique() {
     const calculPrixVente = (byPortion) => {
         // boolean byPortion : if true, then price is divided by the number of portions, else it will be the price for the whole production.
         let val = 0;
-        if(def){
-            if(costs.charges){
-                val = totalCouts() * (costs.markup/100)
-            }else{
-                val = totalCouts() * (costs.markupnocharges/100)
+        if (def) {
+            if (costs.charges) {
+                val = totalCouts() * (costs.markup / 100)
+            } else {
+                val = totalCouts() * (costs.markupnocharges / 100)
             }
-        }else{
-            if(usecharges){
-                val = totalCouts() * (costs.markup/100)
-            }else{
-                val = totalCouts() * (costs.markupnocharges/100)
+        } else {
+            if (usecharges) {
+                val = totalCouts() * (costs.markup / 100)
+            } else {
+                val = totalCouts() * (costs.markupnocharges / 100)
             }
         }
-        if(byPortion){
-            return val/fichetechnique.nbserved;
-        }else{
+        if (byPortion) {
+            return val / fichetechnique.nbserved;
+        } else {
             return val;
         }
     }
@@ -178,9 +178,9 @@ export default function FicheTechnique() {
         let chargesVar = calculCoutAssaisonnement() + calculCoutMatiere();
         let chargesFix = calculCoutChargesFluides() + calculCoutChargesPersonnel();
         let vente = calculPrixVente(true) / 1.1;
-        let mcv = (vente - chargesVar/fichetechnique.nbserved) / vente;
+        let mcv = (vente - chargesVar / fichetechnique.nbserved) / vente;
         let result = chargesFix / mcv;
-        if(chargesFix == 0){
+        if (chargesFix === 0) {
             result = totalCouts() / mcv;
         }
         return Math.ceil(result);
@@ -195,102 +195,113 @@ export default function FicheTechnique() {
         getCosts().then((result) => {
             setCosts(result);
         })
-        setTimeout(() => setLoading(true),1000);
+        setTimeout(() => setLoading(true), 1000);
         // eslint-disable-next-line react-hooks/exhaustive-deps
-      }, []);
-    
+    }, []);
+
     return (
-        loading ? 
-        <><div className='container' ref={referencePDF}>
-            <div>
-                <h3>FICHE TECHNIQUE</h3>
+        loading ?
+            <><div className='container' ref={referencePDF}>
+                <div>
+                    <h3>FICHE TECHNIQUE</h3>
+                </div>
+                <div className="grid1">
+                    <h4 className='title'>INTITULE</h4>
+                    <h4 className='title'>RESPONSABLE</h4>
+                    <h4 className='title'>NBRE DE COUVERTS</h4>
+                    <p className='info centered'>{fichetechnique.name}</p>
+                    <p className='info centered'>{fichetechnique.responsable}</p>
+                    <p className='info centered'>{fichetechnique.nbserved}</p>
+                </div>
+                <div className="grid2">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th className='title'>DENREES</th>
+                                <th className='title'>UNITES</th>
+                                <th className='title'>QUANTITES</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {fichetechnique.steps.map((step) =>
+                                step.ingredients.map((i) => (
+                                    <tr key={step.rank+"_"+i.code}>
+                                        <td className='info centered'>{i.libelle}</td>
+                                        <td className='info centered'>{i.unit}</td>
+                                        <td className='info centered'>{i.quantity}</td>
+                                    </tr>
+                                )))}
+                        </tbody>
+                    </table>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th className='title'>N° PHASE</th>
+                                <th className='title'>TECHNIQUES DE REALISATION</th>
+                                <th className='title'>DUREE</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {fichetechnique.steps.map((s) => (
+                                <tr key={s.rank}>
+                                    <td className='info centered'>{s.rank}</td>
+                                    <td className='info'><p className="centered"><b>{s.title}</b></p><p>{s.description}</p></td>
+                                    <td className='info centered'>{s.time}</td>
+                                </tr>
+                            ))
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <div hidden={checked}>
+                    <h4>COUTS DE PRODUCTION</h4>
+                    <p>Couts matière : {(calculCoutMatiere()).toFixed(2)}€</p>
+                    <p>Cout assaisonnement : {(calculCoutAssaisonnement()).toFixed(2)}€</p>
+                    <p>Couts fluides : {(calculCoutChargesFluides()).toFixed(2)}€</p>
+                    <p>Couts personnel : {(calculCoutChargesPersonnel()).toFixed(2)}€</p>
+                    <h4>PRIX DE VENTE</h4>
+                    <p>Prix de vente : {(calculPrixVente(false)).toFixed(2)}€</p>
+                    <p>Prix de vente par portion : {(calculPrixVente(true)).toFixed(2)}€</p>
+                    <p>Bénéfice par portion : {(calculBeneficeParPortion()).toFixed(2)}€</p>
+                    <p>Pour que cette recette soit rentable, il faut vendre au moins {portionsVendusPourRentabilité()} portions.</p>
+                </div>
             </div>
-            <div className="grid1">
-                <h4 className='title'>INTITULE</h4>
-                <h4 className='title'>RESPONSABLE</h4>
-                <h4 className='title'>NBRE DE COUVERTS</h4>
-                <p className='info centered'>{fichetechnique.name}</p>
-                <p className='info centered'>{fichetechnique.responsable}</p>
-                <p className='info centered'>{fichetechnique.nbserved}</p>
-            </div>
-            <div className="grid2">
-                <table>
-                    <thead>
-                        <tr>
-                            <th className='title'>DENREES</th>
-                            <th className='title'>UNITES</th>
-                            <th className='title'>QUANTITES</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {fichetechnique.steps.map((step) => 
-                        step.ingredients.map((i) =>(
-                        <tr>
-                         <td className='info centered'>{i.libelle}</td>
-                         <td className='info centered'>{i.unit}</td>
-                         <td className='info centered'>{i.quantity}</td>
-                        </tr>
-                    )))}
-                    </tbody>
-                </table>
-                <table>
-                    <thead>
-                        <tr>
-                            <th className='title'>N° PHASE</th>
-                            <th className='title'>TECHNIQUES DE REALISATION</th>
-                            <th className='title'>DUREE</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {fichetechnique.steps.map((s) => (
-                        <tr>
-                         <td className='info centered'>{s.rank}</td>
-                         <td className='info'><p className="centered"><b>{s.title}</b></p><p>{s.description}</p></td>
-                         <td className='info centered'>{s.time}</td>
-                        </tr>
-                    ))
-                    }
-                    </tbody>
-                </table>
-            </div>
-            <div hidden={checked}>
-                <h4>COUTS DE PRODUCTION</h4>
-                <p>Couts matière : {(calculCoutMatiere()).toFixed(2)}€</p>
-                <p>Cout assaisonnement : {(calculCoutAssaisonnement()).toFixed(2)}€</p>
-                <p>Couts fluides : {(calculCoutChargesFluides()).toFixed(2)}€</p>
-                <p>Couts personnel : {(calculCoutChargesPersonnel()).toFixed(2)}€</p>
-                <h4>PRIX DE VENTE</h4>
-                <p>Prix de vente : {(calculPrixVente(false)).toFixed(2)}€</p>
-                <p>Prix de vente par portion : {(calculPrixVente(true)).toFixed(2)}€</p>
-                <p>Bénéfice par portion : {(calculBeneficeParPortion()).toFixed(2)}€</p>
-                <p>Pour que cette recette soit rentable, il faut vendre au moins {portionsVendusPourRentabilité()} portions.</p>
-            </div>
-        </div>
-        <button onClick={() => toPDF()}>Print</button>
-        <div>
-            <div className='gridrow'>
-                <label className='FormLabel' for="charges">Utilise les paramètres de couts par défaut :</label>
-                <input className='FormInput' checked={def} id="charges" type="checkbox" onChange={(event) => setDef(event.target.checked)} />
-            </div>
-            <div className='gridrow'>
-                <label className='FormLabel' for="charges">Utilise charges pour calculer les couts :</label>
-                <input disabled={def} className='FormInput' checked={usecharges} id="charges" type="checkbox" onChange={(event) => setUseCharges(event.target.checked)} />
-            </div>
-            <button onClick={() => commitChanges()}>Confirmer</button>
-        </div>
-        <div className='gridrow'>
-            <label className='FormLabel' for="checked">Cacher les couts :</label>
-            <input className='FormInput' checked={checked} id="checked" type="checkbox" onChange={(event) => setChecked(event.target.checked)} />
-        </div>
-        <div className="ButtonDiv">
-            <button className='FormSubmit' onClick={() => navStep()}>Ajouter une étape à la Fiche Technique</button>
-            <button className='FormSubmit' onClick={() => navIngredient()}>Ajouter une un ingrédient à une étape</button>
-            <button className='FormSubmit' onClick={() => navEditStep()}>Modifier une étape</button>
-            <button className='FormSubmit' onClick={() => navEditIngredient()}>Modifier un ingrédient</button>
-            <button className='FormSubmit' onClick={() => navEditFiche()}>Modifier</button>
-            <button className='DelButton' onClick={() => deleteFiche()}>Supprimer</button>
-        </div>
-        </>
-        : <Loading></Loading>
+                <div className='container'>
+                <div className="ButtonDiv2">
+                        <button className='FormSubmit' onClick={() => navStep()}>Ajouter une étape à la Fiche Technique</button>
+                        <button className='FormSubmit' onClick={() => navIngredient()}>Ajouter une un ingrédient à une étape</button>
+                        <button className='FormSubmit' onClick={() => navEditStep()}>Modifier une étape</button>
+                        <button className='FormSubmit' onClick={() => navEditIngredient()}>Modifier un ingrédient</button>
+                        <button className='FormSubmit' onClick={() => navEditFiche()}>Modifier</button>
+                        <button className='AddButton' onClick={() => toPDF()}>Print</button>
+                        <button className='DelButton' onClick={() => deleteFiche()}>Supprimer</button>
+                    </div>
+                    <div>
+                        <div className='checkbox'>
+                            <div>
+                                <input className="demo5" checked={def} id="defaut" type="checkbox" onChange={(event) => setDef(event.target.checked)} />
+                                <label htmlFor="defaut"></label>
+                            </div>
+                            <label className='checkbox-label'>Utilise les paramètres de couts par défaut</label>
+                        </div>
+                        <div className='checkbox'>
+                            <div>
+                                <input disabled={def} className="demo5" checked={usecharges} id="charges" type="checkbox" onChange={(event) => setUseCharges(event.target.checked)} />
+                                <label htmlFor="charges"></label>
+                            </div>
+                            <label className='checkbox-label'>Utilise charges pour calculer les couts</label>
+                        </div>
+                        <button className='AddButton' onClick={() => commitChanges()}>Confirmer</button>
+                    </div>
+                    <div className='checkbox'>
+                        <div>
+                           <input className="demo5" checked={checked} id="checked" type="checkbox" onChange={(event) => setChecked(event.target.checked)} /> 
+                           <label htmlFor="checked"></label>
+                        </div>
+                        <label className='checkbox-label'>Cacher les couts</label>
+                    </div>
+                </div>
+            </>
+            : <Loading></Loading>
     );
 }

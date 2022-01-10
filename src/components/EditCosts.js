@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
-import { Link } from 'react-router-dom';
 import { getCosts, setCosts } from '../api/costs.api';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import './IngredientForm.css';
@@ -48,7 +47,7 @@ export default function EditCosts() {
     <div style={{ height: 400, width: '100%' }}>
         <div className='FormContainer'>
             <div className='Form'>
-                <h3>Ajouter Entête de Fiche Technique</h3>
+                <h3>Paramètres des coûts de l'application</h3>
                 <div className='blockForm'>
                     <div className='gridrow'>
                         <label className='FormLabel' for="fluides">Couts des fluides</label>
@@ -79,10 +78,8 @@ export default function EditCosts() {
                         <input className='FormInput' checked={charges} id="charges" type="checkbox" onChange={(event) => setCharges(event.target.checked)} />
                     </div>
                 </div>
-                <div>
                     <button className="FormSubmit" onClick={() => submit()}>Confirmer</button>
-                    <a className='DelButton' href='/couts'><button className="DelButton">Annuler</button></a>
-                </div>
+                    <button className="DelButton" onClick={() => navDetail()}>Annuler</button>
             </div>
         </div>
     </div></>

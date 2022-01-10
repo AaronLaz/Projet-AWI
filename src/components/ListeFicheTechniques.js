@@ -60,9 +60,7 @@ export default function ListeFicheTechniques() {
                     <select className="mercurial-search-input" name="steps" id="steps" onChange={(event) => setCatSearch(event.target.value)}>
                         <option value="">Tous</option>
                         {categories.map((f) => (
-                            <>
                             <option key={f} value={f}>{f}</option>
-                            </>
                         ))}
                     </select>
                     <button className="mercurial-search-button" onClick={() => searchByCategory()}>Chercher</button> 

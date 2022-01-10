@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
-import { Link } from 'react-router-dom';
 import { getCosts } from '../api/costs.api';
 import './IngredientForm.css';
 
@@ -8,7 +7,7 @@ export default function Costs() {
   const [costs, setCosts] = useState([]);
 
   const toBoolean = (value) => {
-    return (value==1).toString();
+    return (value === 1).toString();
   }
   
   useEffect(() => {
