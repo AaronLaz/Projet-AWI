@@ -11,9 +11,9 @@ This project is deployed using heroku at [https://projet-awi.herokuapp.com/](htt
 ### Functionality
 
 * Mercuriale
-* Num 1
-* Num 2
-* Num 3
+  * Num 1
+  * Num 2
+  * Num 3
 
 * Fiche Techniques
 
