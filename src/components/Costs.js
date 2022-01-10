@@ -21,11 +21,14 @@ export default function Costs() {
     <><Helmet>Coûts</Helmet>
     <div className='FormContainer'>
       <div className="Form">
+        <h3>Cout des charges</h3>
         <p>Couts des fluides : {costs.fluides}€ / h</p>
         <p>Couts du personnel : {costs.personnel}€ / h</p>
-        <p>Markup : {costs.markup}%</p>
-        <p>Markup without charges : {costs.markupnocharges}%</p>
-        <p>Charges ? {toBoolean(costs.charges)}</p>
+        <h3>Calcul du prix de vente</h3>
+        <p>Taux avec charges : {costs.markup}%</p>
+        <p>Taux sans charges : {costs.markupnocharges}%</p>
+        <h3>Réglage par défaut</h3>
+        <p>Utiliser les charges pour le calcul des couts ? {toBoolean(costs.charges)}</p>
         <div className="mercurial-header-div">
           <a href='/couts/edit'><button className='AddButton'>Modifier</button></a>
         </div>
