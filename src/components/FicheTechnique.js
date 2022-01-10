@@ -45,6 +45,8 @@ export default function FicheTechnique() {
         const url = `/fichetechnique/edit/${id}`;
         history.push(url);
     }
+
+    // function converts booleans to integers
     const toInt = (val) => {
         if(val){
             return 1;
@@ -84,6 +86,7 @@ export default function FicheTechnique() {
         });
     }
 
+    // these functions calculate costs
     const calculCoutMatiere = () => {
         let sum = 0;
         fichetechnique.steps.forEach((s) => {
@@ -143,6 +146,7 @@ export default function FicheTechnique() {
     }
 
     const calculPrixVente = (byPortion) => {
+        // boolean byPortion : if true, then price is divided by the number of portions, else it will be the price for the whole production.
         let val = 0;
         if(def){
             if(costs.charges){

@@ -39,6 +39,7 @@ export default function Table() {
     setResults(result);
   }
 
+  // categorisation search is done by comparing the ingredient code to the categories initialised below.
   const initCategories = () => {
     let array = [];
     array.push(allCat);
