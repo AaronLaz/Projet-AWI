@@ -2,11 +2,59 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Application
+
+### Application
+
+This project is deployed using heroku at [https://projet-awi.herokuapp.com/](https://projet-awi.herokuapp.com/).
+
+### Functionality
+
+* Ingredients
+  * Search by name
+  * Search by category
+  * Add a new ingredient
+  * Add stock to an ingredient
+  * Modify an ingredient
+  * Delete an ingredient
+  * See allergens
+
+* Technical Documents
+  * Search by title
+  * Search by category
+  * Add a Technical Document
+  * Modify a Technical Document
+  * Modify the number of people served with subsequent changes to ingredient quantities
+  * Add a step to a Technical Document
+  * Modify a step
+  * Add an ingredient to a step
+  * Modify an ingredient in a step
+  * Modify whether costs are taken into account for calculations
+  * Show or hide Technical Document costs
+  * Delete a Technical Document
+  * Delete a step from a Technical Document
+  * Delete an ingredient from a step
+  * Print Technical Document
+
+* Tickets
+  * Search Technical Documents by title
+  * Add Technical Document to ticket
+  * Remove added document from ticket
+  * Show ingredients in ticket
+  * Automatically decrement stock on printing of ticket
+
+* Costs
+  * Modify fluid costs
+  * Modify personel costs
+  * Modify price markup with costs taken into account
+  * Modify price markup without costs
+  * Modify default settings for the technical documents
+
+## Source Files
 
 In the project directory, you can run:
 
-### `npm start`
+### `npm run start`
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
@@ -44,27 +92,3 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
