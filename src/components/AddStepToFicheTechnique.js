@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import './FicheTechnique.css';
-import { addStepToFicheTechnique, addStep } from '../api/fichetechnique.api';
+import { addStepToFicheTechnique, addStep, freeStepID } from '../api/fichetechnique.api';
 
 export default function AddStepToFicheTechnique() {
 
@@ -21,19 +21,22 @@ export default function AddStepToFicheTechnique() {
     }
 
     const submitHeader = () => {
-        const step = {
-            "stepid":stepid,
-            "title":title,
-            "description":description,
-            "time":time,
-        };
-        addStep(step).then((result) => {
-        const join = {
-            "docid":id,
-            "stepid":stepid,
-            "rank":rank,
-        };
-        addStepToFicheTechnique(join).then((result) => {navDetail();})});
+        freeStepID().then((result) => {
+            setStepId(result.stepid);
+            const step = {
+                "stepid":result.stepid,
+                "title":title,
+                "description":description,
+                "time":time,
+            };
+            addStep(step).then((res) => {
+                const join = {
+                    "docid":id,
+                    "stepid":result.stepid,
+                    "rank":rank,
+                };
+                addStepToFicheTechnique(join).then((re) => {navDetail();})});
+        })
     }
 
     return (
@@ -42,12 +45,6 @@ export default function AddStepToFicheTechnique() {
         <div className='FormContainer'>
             <div className='Form'>
                 <h3>Ajouter Une Etape la Fiche Technique</h3>
-                <div className='blockForm'>
-                    <div className='gridrow'>
-                        <label className='FormLabel' for="stepid">ID</label>
-                        <input className='FormInput' placeholder="ID" id="stepid" type="number" onChange={(event) => setStepId(event.target.value)} />
-                    </div>
-                </div>
                 <div className='blockForm'>
                     <div className='gridrow'>
                         <label className='FormLabel' for="title">Titre</label>

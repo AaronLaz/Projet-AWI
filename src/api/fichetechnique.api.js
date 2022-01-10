@@ -40,7 +40,7 @@ export async function getFicheTechnique(id) {
 export async function getDocIDForStep(stepid){
     return new Promise((resolve, reject) => {
         try{
-            const url = `https://awi-backend.herokuapp.com/technicaldoc/get/docid/${stepid}`;
+            const url = `https://awi-backend.herokuapp.com/technicaldoc/docid/get/${stepid}`;
             const config = {
                 method: 'get',
                 headers: {
@@ -268,6 +268,25 @@ export async function addStepToFicheTechnique(data){
                     "docid": data.docid,
                     "stepid": data.stepid,
                     "rank": data.rank,
+                }
+            };
+            axios(url, config).then((result) => {
+                resolve(result.data);
+            });
+        } catch (err) {
+            reject(err);
+        }
+    })
+}
+
+export async function freeStepID(){
+    return new Promise((resolve, reject) => {
+        try {
+            const url = `https://awi-backend.herokuapp.com/technicaldoc/stepids/get`;
+            const config = {
+                method: 'get',
+                headers: {
+                    'Content-Type': 'application/json' 
                 }
             };
             axios(url, config).then((result) => {
