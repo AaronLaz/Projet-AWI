@@ -19,10 +19,10 @@ This project is deployed using heroku at [https://projet-awi.herokuapp.com/](htt
   * Voir allergènes
 
 * Fiche Techniques
- * Recherche par titre
- * Recherche par catégorie
- * Ajouter une fiche technique
- * Ajouter une étape à la fiche technique
+  * Recherche par titre
+  * Recherche par catégorie
+  * Ajouter une fiche technique
+  * Ajouter une étape à la fiche technique
 
 * Etiquettes
 
