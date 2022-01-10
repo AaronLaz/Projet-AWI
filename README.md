@@ -10,23 +10,45 @@ This project is deployed using heroku at [https://projet-awi.herokuapp.com/](htt
 
 ### Functionality
 
-* Mercuriale
-  * Recherche par libellé
-  * Recherche par catégorie
-  * Ajouter un ingrédient
-  * Ajouter du stock
-  * Modifier un ingrédient
-  * Voir allergènes
+* Ingredients
+  * Search by name
+  * Search by category
+  * Add a new ingredient
+  * Add stock to an ingredient
+  * Modify an ingredient
+  * Delete an ingredient
+  * See allergens
 
-* Fiche Techniques
-  * Recherche par titre
-  * Recherche par catégorie
-  * Ajouter une fiche technique
-  * Ajouter une étape à la fiche technique
+* Technical Documents
+  * Search by title
+  * Search by category
+  * Add a Technical Document
+  * Modify a Technical Document
+  * Modify the number of people served with subsequent changes to ingredient quantities
+  * Add a step to a Technical Document
+  * Modify a step
+  * Add an ingredient to a step
+  * Modify an ingredient in a step
+  * Modify whether costs are taken into account for calculations
+  * Show or hide Technical Document costs
+  * Delete a Technical Document
+  * Delete a step from a Technical Document
+  * Delete an ingredient from a step
+  * Print Technical Document
 
-* Etiquettes
+* Tickets
+  * Search Technical Documents by title
+  * Add Technical Document to ticket
+  * Remove added document from ticket
+  * Show ingredients in ticket
+  * Automatically decrement stock on printing of ticket
 
-* Couts
+* Costs
+  * Modify fluid costs
+  * Modify personel costs
+  * Modify price markup with costs taken into account
+  * Modify price markup without costs
+  * Modify default settings for the technical documents
 
 ## Source Files
 
