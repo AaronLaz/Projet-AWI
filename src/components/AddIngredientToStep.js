@@ -65,7 +65,7 @@ export default function AddIngredientToStep() {
                         <option>Aucun</option>
                         {ingredients.map((i) => (
                             <>
-                            <option key={i.code} value={i.code}>{i.libelle}</option>
+                            <option key={i.code} value={i.code}>{i.code.toString()+" - "+i.libelle}</option>
                             </>
                         ))}
                     </select>
